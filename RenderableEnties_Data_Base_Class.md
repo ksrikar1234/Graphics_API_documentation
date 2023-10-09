@@ -2,23 +2,25 @@
 ## Usage 
 ```
 Renderer_API::Data_Base DataBase;
-
-uint64_t UUID = topo_corner["assigned_corners"].UUID;
-
-DataBase.add(topo_corner["assigned_corners"]);
-
-
+uint64_t UniqueKey = DataBase.add(topo_corner["assigned_corners"]);
+DataBase.get(key);
 ```
 
 ## Class Prototype
 ```cpp
 namespace Renderer_API {
-
 class Data_Base {
 
+uint64_t Assignable_UUID;
 std::unordered_map<uint64_t, RenderableEntity*> RenderableEntities_DataBase;
 
-void add(RenderableEntity& renderable_entity);
+ Data_Base() { Assignable_UUID = 0; } // Starting Assigned ID is = 0
+~Data_Base() {}
+
+uint64_t add(RenderableEntity& renderable_entity);
+// overload add() to store other elements as well
+
+RenderableEntity* getEntity(uint64_t key);
 
 };
 
@@ -27,12 +29,17 @@ void add(RenderableEntity& renderable_entity);
 
 ## Class Implementation
 ```cpp
-namespace Renderer_API {
 
-void Data_Base::add(RenderableEntity& renderable_entity)
+namespace Renderer_API {
+uint64_t Data_Base::add(RenderableEntity& renderable_entity)
 {
+  renderable_entity.UUID = Assignable_UUID;
+  Assignable_UUID++;
   RenderableEntities_DataBase[renderable_entity.UUID] = &renderable_entity; 
 }
+
+RenderableEntity* Data_Base::getEntity(uint64_t key)
+{  return RenderableEntities_DataBase[key]; }
 
 };
 ```

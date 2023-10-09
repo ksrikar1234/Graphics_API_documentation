@@ -1,6 +1,6 @@
-# Graphics_API_Revamp_documentation
+# Graphics API Revamp documentation
 
-GridPro Graphics_API_Revamp_documentation.
+GridPro Graphics API Revamp documentation.
 
 ## Table of Contents
 

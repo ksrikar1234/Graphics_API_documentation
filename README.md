@@ -52,7 +52,7 @@ Existing RenderPipeline Structure & Configuration exists as
 
 ## Challenges in Porting
 - Models contain view methods like `model.render()`
-  Example : `topology.draw_surface_render()` which binds the model data structure to a render api paradigm.
+- Example : `topology.draw_surface_render()` which binds the model data structure to a render api paradigm.
 - Mild & Extreme Explicit API's like `OpenGL 3.3, OpenGL 4.3` & `Vulkan , DirectX` cannot be use in this manner.
 
      

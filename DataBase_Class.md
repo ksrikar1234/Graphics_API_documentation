@@ -7,8 +7,8 @@ Renderer_API::RenderableEntity topo_corners;
 topo_corners["assigned_corners"].setVertexArray(vertex_array);
 // Set some other data as well
 
-uint64_t UniqueKey = DataBase.addEntity(topo_corners["assigned_corners"]);
-DataBase.getEntity(UniqueKey);
+uint64_t assigned_corners_entity_key = DataBase.addEntity(topo_corners["assigned_corners"]);
+DataBase.getEntity(assigned_corners_entity_key)->vertex_array_ptr;;
 ```
 
 ## Class Prototype

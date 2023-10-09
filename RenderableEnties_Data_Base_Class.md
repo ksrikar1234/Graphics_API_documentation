@@ -20,9 +20,6 @@ std::unordered_map<uint64_t, RenderableEntity*> RenderableEntities_DataBase;
 uint64_t addEntity(RenderableEntity& renderable_entity);
 RenderableEntity* getEntity(uint64_t key);
 // overload addEntity() & getEntity() to store & retrive other types of Entity Objects as well
-
-
-
 };
 
 }// namespace Renderer_API
@@ -42,5 +39,5 @@ uint64_t Data_Base::addEntity(RenderableEntity& renderable_entity)
 RenderableEntity* Data_Base::getEntity(uint64_t key)
 {  return RenderableEntities_DataBase[key]; }
 
-};
+}
 ```

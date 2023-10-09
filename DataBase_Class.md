@@ -42,7 +42,7 @@ namespace Renderer_API {
     }
 
     RenderableEntity* Data_Base::getEntity(uint64_t key) {
-        auto it = RenderableEntities_DataBase.find(key);
+        std::unordered_map<uint64_t, RenderableEntity>::iterator it = RenderableEntities_DataBase.find(key);
         if (it != RenderableEntities_DataBase.end()) {
             return &(it->second);
         }

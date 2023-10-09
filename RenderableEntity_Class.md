@@ -1,6 +1,18 @@
 ## RenderableEntity class implemetation
 
 ```cpp
+
+namespace Renderer_API {
+
+enum class Visibility            {TRUE, FALSE};
+enum class PrimitiveType         {POINTS, LINES, LINE_STRIP, TRIANGLES, TRIANGLE_STRIP, QUADS, QUAD_STRIP };
+enum class ShadeModel            {FLAT , SMOOTH};
+enum class ColorSchema           {MONO, PER_PRIMITIVE, PER_VERTEX};
+enum class PolygonMode           {POINTS, LINES, FILL};
+enum class Material              {ENABLE, DISABLE};
+enum class Lighting              {ENABLE, DISABLE};
+enum VertexAttributeLayout       {V, VC, VN, VCN};
+
 struct RenderableEntity {
 
 uint64_t UUID;
@@ -10,24 +22,17 @@ std::string name;
 uint32_t vertex_buffer_object_id;
 uint32_t vertex_array_object_id;
 uint32_t shader_program_handle_id;
-
-enum class Visibility            {TRUE, FALSE};
-enum class PrimitiveType         {POINTS, LINES, LINE_STRIP, TRIANGLES, TRIANGLE_STRIP, QUADS, QUAD_STRIP };
-enum class ShadeModel            {FLAT , SMOOTH};
-enum class ColorSchema           {MONO, PER_PRIMITIVE, PER_VERTEX};
-enum class PolygonMode           {POINTS, LINES, FILL};
-enum class Material              {ENABLE, DISABLE};
-enum class Lighting              {ENABLE, DISABLE};
+glm::mat4 model_matrix;
 
 Visibility visibility;
 PrimitiveType primitive_type;
+ShadeModel shade_model;
 PolygonMode polygon_mode;
 float primitive_thickness;
 
-ShadeModel shade_model;
-
 struct Material_pty
-{   
+{
+   Material material_flag
    float color;
    float shininess;
    glm::vec3 ambient, diffuse , specular;
@@ -37,18 +42,12 @@ Material_pty material_pty;
 
 struct VertexAttributes 
 {
-
-   std::vector<float>* position_array_ptr = nullptr;
-   std::vector<float>* color_array_ptr = nullptr;
-   std::vector<float>* normal_array_ptr = nullptr;
-   std::vector<uint32_t>* index_array_ptr = nullptr;
-   
-   std::vector<float>  vertex_attribute_array;
-   std::vector<float>* vertex_attribute_array_ptr = nullptr;
-
-   enum VertexAttributeLayout {V, VC, VN, VCN};
-  
    VertexAttributeLayout vertex_attribute_layout;
+   std::vector<float>* position_array_ptr; std::vector<float>* color_array_ptr; std::vector<float>* normal_array_ptr;
+   std::vector<uint32_t>* index_array_ptr;
+   std::vector<float>  vertex_attribute_array;
+   std::vector<float>* vertex_attribute_array_ptr;
+
    
    VertexAttributes() : position_array_ptr(nullptr), color_array_ptr(nullptr), normal_array_ptr(nullptr), 
                         index_array_ptr(nullptr) , vertex_attribute_array_ptr(nullptr)                 
@@ -62,12 +61,14 @@ struct VertexAttributes
       vertex_attribute_array.resize(0);
    }
 
-  
 VertexAttributes vertex_attributes;
-glm::mat4 model_matrix;
+
+void set_vertex_attribute_array();  
+
+
 
 };
-
+} // namespace Renderer_API
 ```
 
 - `set_vertex_attribute_array()` implementation

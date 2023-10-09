@@ -147,7 +147,7 @@ void RenderableEntity::set_vertex_attribute_array()
       
       for(size_t vertex_id = 0; vertex_id < position_array_ptr->size()*n; vertex_id += n)
          {       
-            if(n)
+            if(n>=0)
               {
                this->vertex_attribute_array.push_back((*this->position_array_ptr)[vertex_id]);
                this->vertex_attribute_array.push_back((*this->position_array_ptr)[vertex_id+1]);

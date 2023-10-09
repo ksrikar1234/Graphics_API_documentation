@@ -2,7 +2,12 @@
 ## Usage 
 ```cpp
 Renderer_API::Data_Base DataBase;
-uint64_t UniqueKey = DataBase.addEntity(topo_corner["assigned_corners"]);
+Renderer_API::RenderableEntity topo_corners;
+
+topo_corners["assigned_corners"].setVertexArray(vertex_array);
+// Set some other data as well
+
+uint64_t UniqueKey = DataBase.addEntity(topo_corners["assigned_corners"]);
 DataBase.getEntity(UniqueKey);
 ```
 
@@ -12,7 +17,7 @@ namespace Renderer_API {
 class Data_Base {
 
 uint64_t Assignable_UUID;
-std::unordered_map<uint64_t, RenderableEntity*> RenderableEntities_DataBase;
+std::unordered_map<uint64_t, RenderableEntity> RenderableEntities_DataBase;
 
  Data_Base() { Assignable_UUID = 0; } // Starting Assigned ID is = 0
 ~Data_Base() {}
@@ -37,7 +42,7 @@ uint64_t Data_Base::addEntity(RenderableEntity& renderable_entity)
 }
 
 RenderableEntity* Data_Base::getEntity(uint64_t key)
-{  return RenderableEntities_DataBase[key]; }
+{  return &RenderableEntities_DataBase[key]; }
 
 }
 ```

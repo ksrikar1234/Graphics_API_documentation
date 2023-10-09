@@ -82,6 +82,7 @@ std::unordered_map<std::string, Renderer_API::RenderableEntity> topo_corners, to
 };
 
 ```
+
 Example for setting corners:
 
 ```cpp
@@ -90,12 +91,31 @@ topo_corners["assigned_corners"].setPrimitiveType(Renderer_API::PrimitiveType::P
 topo_corners["assigned_corners"].setVertexArray(vertexarray);
 
 topo_corners["assigned_corners"].setColorSchema(Renderer_API::ColorSchema::PER_VERTEX);
+topo_corners["assigned_corners"].setColorArray(colorarray);
+
+//Optional
+float shininess;
+glm::vec3 ambient, diffuse, specular;
+topo_corners["assigned_corners"].setMaterialPty(ambient, diffuse, specular, shininess);
+
+
+```
+
+
+Example for setting corners:
+
+```cpp
+
+(topo_surfaces["linear_surface_segments"]).[1].setPrimitiveType(Renderer_API::PrimitiveType::POINTS);
+topo_surfaces["linear_surface_segments"].[1].setVertexArray(vertexarray);
+
+topo_surfaces["linear_surface_segments"].[1].setColorSchema(Renderer_API::ColorSchema::PER_VERTEX);
 
 float shininess;
 glm::vec3 ambient, diffuse, specular;
 
-topo_corners["assigned_corners"].setMaterialPty(ambient, diffuse, specular, shininess);
-topo_corners["assigned_corners"].setColorArray(colorarray);
+topo_surfaces["linear_surface_segments"].[1].setMaterialPty(ambient, diffuse, specular, shininess);
+topo_surfaces["linear_surface_segments"].[1].setColorArray(colorarray);
 
 ```
 

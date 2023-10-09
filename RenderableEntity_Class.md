@@ -1,4 +1,30 @@
-## RenderableEntity class implemetation
+## RenderableEntity class 
+### Usage
+```cpp
+
+{
+// Localised Namespace
+
+using namespace Renderer_API;
+RenderableEntity linear_surface_segment;
+
+linear_surface_segment.UUID = 1234;
+
+linear_surface_segment.setPrimitiveType(PrimitiveType::QUADS);
+linear_surface_segment.setColorSchema(ColorSchema::PER_PRIMITIVE);
+linear_surface_segment.setVertexAttributeLayout(VertexAttributeLayout::VCN);
+
+linear_surface_segment.setVertexArray(vertex_array);
+linear_surface_segment.setColorArray(color_array);
+linear_surface_segment.setNormalArray(normal_array);
+
+// Localised Namespace
+}
+
+```
+
+
+### implemetation
 
 ```cpp
 
@@ -55,6 +81,7 @@ struct VertexAttributes
                         index_array_ptr(nullptr) , vertex_attribute_array_ptr(nullptr)                 
    {
       /* Constructor*/
+      visibility = Visibility_Flag::ENABLE;
    }
 
    ~VertexAttributes()
@@ -67,26 +94,33 @@ VertexAttributes vertex_attributes;
 
 void set_vertex_attribute_array();  
 
-
+// Getters & setters
 
 };
 } // namespace Renderer_API
 ```
 
+## Method Implementations
+###  1. set_vertex_attribute_array()
+
+- set_vertex_attribute_array() is used to accumulate all vertex attributes into a interleaved array
+
 - `set_vertex_attribute_array()` implementation
+
 
 
 ```cpp
 
-namespcae Renderer_API {
+namespace Renderer_API {
 
 void RenderableEntity::set_vertex_attribute_array()
    {  
       if(this->vertex_attribute_array_ptr != nullptr) return; // That means Vertex Attribute Array is externally generated & its location is assigned
          
-      uint32_t n = vertex_attribute_layout; 
-      n = n > 0 ? (n <= 2 ? 2 : 3) : 1; // Fancy way of saying layout of Vertex array = { {vertex} , {color} , {normal} } set of combinations { V , VC , VN , VCN}
-
+      uint32_t n = vertex_attribute_layout;
+      // Fancy way of saying layout of Vertex array = { {vertex} , {color} , {normal} } set of combinations { V , VC , VN , VCN}
+      n = n > 0 ? (n <= 2 ? 2 : 3) : 1;
+    
       this->vertex_attribute_array.reserve(n*position_array_ptr->size());
       
       for(size_t vertex_id = 0; vertex_id < position_array_ptr->size()*n; vertex_id += n)

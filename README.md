@@ -19,12 +19,17 @@ To replace Fixed pipeline approach with shader approach in GridPro WS.
 
 Existing RenderPipeline Structure & Configuration exists as
 - MVP pattern is used to seperate MODEL <-> PRESENTER_LAYER <-> VIEW
-  using `Gp_gui_Models <-> Gp_gui_presenter <-> Gp_gui_view` classes  
+  using `Gp_gui_Models <-> Gp_gui_presenter <-> Gp_gui_view` classes
+  
 - A class derived from `QApplication` class called -> `Gp_gui_Application` which has `Gp_gui_mainwindow`
+  
 - `Gp_gui_mainwindow` has subwindow attached called `gp_gui_glwidget`
+
 - `gp_gui_glwidget` class is derived from `QOGLWiget`, is used to setup windowing, OpenGL context,
    Scene Configuration (Not Exactly but setting up mvp from camera pos , view volume evaluation , peripheral input handling etc...) 
+
 - `gp_gui_glwidget::paintGL()` is where frame rendering starts.
+
 -  Inside `gp_gui_glwidget::paintGL`, a reference for gp_gui_model objects are accquired.
   
 #### What are gp_gui_models ??

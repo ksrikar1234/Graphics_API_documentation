@@ -34,7 +34,7 @@ RenderableEntity* getEntity(uint64_t key);
 ```cpp
 
 namespace Renderer_API {
-    uint64_t Data_Base::addEntity(RenderableEntity renderable_entity) {
+    uint64_t Data_Base::addEntity(RenderableEntity& renderable_entity) {
         renderable_entity.UUID = Assignable_UUID;
         RenderableEntities_DataBase[renderable_entity.UUID] = renderable_entity;
         Assignable_UUID++;

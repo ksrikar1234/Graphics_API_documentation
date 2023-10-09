@@ -126,7 +126,7 @@ void RenderableEntity::set_vertex_attribute_array()
         assert(this->vertex_array_ptr != nullptr);
         assert(this->vertex_array_ptr->size() != 0);
         if(n == 1 || n == 3)
-        { 
+        {
          assert(this->color_array_ptr != nullptr);
          assert(this->color_array_ptr->size() != 0);
         }
@@ -141,36 +141,30 @@ void RenderableEntity::set_vertex_attribute_array()
       
       for(size_t vertex_id = 0; vertex_id < position_array_ptr->size()*n; vertex_id += n)
          {       
-            if(this->position_array_ptr != nullptr && this->position_array_ptr->size() != 0 )
+            if(n)
               {
                this->vertex_attribute_array.push_back((*this->position_array_ptr)[vertex_id]);
                this->vertex_attribute_array.push_back((*this->position_array_ptr)[vertex_id+1]);
                this->vertex_attribute_array.push_back((*this->position_array_ptr)[vertex_id+2]);
-              }
 
-            if(vertex_attribute_layout == 1 || vertex_attribute_layout == 3 )
-              {           
-               if(this->color_array_ptr != nullptr && this->color_array_ptr->size() != 0 )
+               if(n == 1 || n == 3)
                  {
                    this->vertex_attribute_array.push_back((*this->color_array_ptr)[vertex_id]);
                    this->vertex_attribute_array.push_back((*this->color_array_ptr)[vertex_id+1]);
                    this->vertex_attribute_array.push_back((*this->color_array_ptr)[vertex_id+2]);
                  }
-              }
 
-           if(vertex_attribute_layout == 2 || vertex_attribute_layout == 3 )
-             {
-              if(this->normal_array_ptr != nullptr && this->normal_array_ptr->size() != 0 )
+               if(n == 2 || n == 3)             
                 {
                  this->vertex_attribute_array.push_back((*this->normal_array_ptr)[vertex_id]);
                  this->vertex_attribute_array.push_back((*this->normal_array_ptr)[vertex_id+1]);
                  this->vertex_attribute_array.push_back((*this->normal_array_ptr)[vertex_id+2]);
                 }
-            }
-         }
-   } /* for loop for VA array end */
-}; // struct VertexAttributes
+              }// if(n)
 
-}
+          } /* for loop for VA array end */
+
+} // set_vertex_attribute_array
+} // namespace Renderer_API
 ```
 

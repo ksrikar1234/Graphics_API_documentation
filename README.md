@@ -59,15 +59,15 @@ Existing RenderPipeline Structure & Configuration exists as
 ## Solutions
 
 ### Temporary Solution : 
-   Create a wrapper class to encapsulate all `OpenGL 2.1` , `OpenGL 3.3` calls into a custom Renderer API 
+- Create a wrapper class to encapsulate all `OpenGL 2.1` , `OpenGL 3.3` calls into a custom Renderer API 
 
 ### Permanent Solution :
-   Create a Proper `(RenderableEntity -> SceneRenderer)` abstraction system.
+- Create a Proper `(RenderableEntity -> SceneRenderer)` abstraction system.
   
 ## New Renderer_API Reference & Guidelines :
-   Create a gp_gui_class by inheriting the topology just like it is currently implemented & instead of maintaining a lot of variables , containers to store vertices, indices, color_data ,    
+- Create a gp_gui_class by inheriting the topology just like it is currently implemented & instead of maintaining a lot of variables , containers to store vertices, indices, color_data ,    
    surface_ids , etc 
-   use RenderableEntity class to group together all required data. 
+- Use RenderableEntity class to group together all required data. 
    
 ```cpp
 

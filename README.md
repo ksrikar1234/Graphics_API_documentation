@@ -128,7 +128,7 @@ topo_surfaces["linear_surface_segments"][1].setColorArray(colorarray);
 
 ```
 
-In paintGL 
+In paintGL use [Scene Class](Scene_Class.md) class object to render
 
 ```cpp
 

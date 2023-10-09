@@ -26,12 +26,11 @@ topo_surfaces[linear_surface_segments][1] = linear_surface_segment;
 ```
 
 
-### implemetation
+### Class Prototype
 
 ```cpp
 
 namespace Renderer_API {
-
 
 enum class PrimitiveType         {POINTS, LINES, LINE_STRIP, TRIANGLES, TRIANGLE_STRIP, QUADS, QUAD_STRIP };
 enum class ShadeModel            {FLAT , SMOOTH};
@@ -48,17 +47,14 @@ struct RenderableEntity {
 uint64_t UUID;
 uint32_t LayerID;
 std::string name;
-
-uint32_t vertex_buffer_object_id;
-uint32_t vertex_array_object_id;
-uint32_t shader_program_handle_id;
-glm::mat4 model_matrix;
-
 Visibility_Flag visibility;
+
 PrimitiveType primitive_type;
-ShadeModel shade_model;
 PolygonMode polygon_mode;
 float primitive_thickness;
+
+
+ShadeModel shade_model;
 
 struct Material_pty
 {
@@ -70,6 +66,11 @@ struct Material_pty
 
 Material_pty material_pty;
 
+uint32_t vertex_buffer_object_id;
+uint32_t vertex_array_object_id;
+uint32_t shader_program_handle_id;
+glm::mat4 model_matrix;
+
 struct VertexAttributes 
 {
    VertexAttributeLayout vertex_attribute_layout;
@@ -77,7 +78,6 @@ struct VertexAttributes
    std::vector<uint32_t>* index_array_ptr;
    std::vector<float>  vertex_attribute_array;
    std::vector<float>* vertex_attribute_array_ptr;
-
    
    VertexAttributes() : position_array_ptr(nullptr), color_array_ptr(nullptr), normal_array_ptr(nullptr), 
                         index_array_ptr(nullptr) , vertex_attribute_array_ptr(nullptr)                 
@@ -109,8 +109,6 @@ void set_vertex_attribute_array();
 
 - `set_vertex_attribute_array()` implementation
 
-
-
 ```cpp
 
 namespace Renderer_API {
@@ -121,9 +119,25 @@ void RenderableEntity::set_vertex_attribute_array()
          
       uint32_t n = vertex_attribute_layout;
       // Fancy way of saying layout of Vertex array = { {vertex} , {color} , {normal} } set of combinations { V , VC , VN , VCN}
-      n = n > 0 ? (n <= 2 ? 2 : 3) : 1;
-    
-      this->vertex_attribute_array.reserve(n*position_array_ptr->size());
+      n = (n < 0) ? 1 : (n <= 2 ? 2 : 3);
+
+      if(n > 0)
+      {
+        assert(this->vertex_array_ptr != nullptr);
+        assert(this->vertex_array_ptr->size() != 0);
+        if(n == 1 || n == 3)
+        { 
+         assert(this->color_array_ptr != nullptr);
+         assert(this->color_array_ptr->size() != 0);
+        }
+        if(n == 2 || n == 3)
+        {
+         assert(this->normal_array_ptr != nullptr);
+         assert(this->normal_array_ptr->size() != 0);
+        }
+      }
+
+      this->vertex_attribute_array.reserve(n*position_array_ptr->size()); // Reserve Enough memory
       
       for(size_t vertex_id = 0; vertex_id < position_array_ptr->size()*n; vertex_id += n)
          {       

@@ -40,7 +40,6 @@ Existing RenderPipeline Structure & Configuration exists as
 
   
  
-
 Primary Data Structures : 
 
 
@@ -61,136 +60,23 @@ To get started with the HPS Application Framework, check out the [Getting Starte
 ## Solutions
 
 ### Temporary Solution : 
-    Create a wrapper class to encapsulate all OpenGL 2.1 , OpenGL 3.3 calls into a custom Renderer API 
+    Create a wrapper class to encapsulate all `OpenGL 2.1` , `OpenGL 3.3` calls into a custom Renderer API 
 
 ### Permanent Solution :
-    Create a Proper (RenderableEntity -> SceneRenderer) abstraction system.
+   Create a Proper `(RenderableEntity -> SceneRenderer)` abstraction system.
   
-## New Renderer_API Reference & Guidelines
-
-Renderer_API::RenderableEntity
-
+## New Renderer_API Reference & Guidelines :
+   Create a gp_gui_class by inheriting the topology just like it is currently implemented & instead of maintaining a lot of variables , containers to store vertices, indices, color_data , surface_ids , etc 
+   use RenderableEntity class to group together all required data. 
+   
 ```cpp
 
-struct RenderableEntity {
-
-uint64_t UUID;
-uint32_t LayerID;
-std::string name;
-
-uint32_t vertex_buffer_object_id;
-uint32_t vertex_array_object_id;
-uint32_t shader_program_handle_id;
-
-enum class Visibility            {TRUE, FALSE};
-enum class PrimitiveType         {POINTS, LINES, LINE_STRIP, TRIANGLES, TRIANGLE_STRIP, QUADS, QUAD_STRIP };
-enum class ShadeModel            {FLAT , SMOOTH};
-enum class ColorSchema           {MONO, PER_PRIMITIVE, PER_VERTEX};
-enum class PolygonMode           {POINTS, LINES, FILL};
-enum class Material              {ENABLE, DISABLE};
-enum class Lighting              {ENABLE, DISABLE};
-
-Visibility visibility;
-PrimitiveType primitive_type;
-PolygonMode polygon_mode;
-float primitive_thickness;
-
-ShadeModel shade_model;
-
-struct Material_pty
-{   
-   Material material;
-   float color;
-   float shininess;
-   glm::vec3 ambient, diffuse , specular;
-};
-
-Material_pty material_pty;
-
-// Should be implemented in Scene class
-struct Lighting_pty
-{   
-   Lighting lighting;
-   glm::vec3 ambient, diffuse , specular;
-};
-
-Lighting_pty lighting_pty;
-
-
-struct VertexAttributes 
+class gp_gui_topology : public topology
 {
-
-   std::vector<float>* position_array_ptr = nullptr;
-   std::vector<float>* color_array_ptr = nullptr;
-   std::vector<float>* normal_array_ptr = nullptr;
-   std::vector<uint32_t>* index_array_ptr = nullptr;
-   
-   std::vector<float>  vertex_attribute_array;
-   std::vector<float>* vertex_attribute_array_ptr = nullptr;
-
-   enum VertexAttributeLayout {V, VC, VN, VCN};
-  
-   VertexAttributeLayout vertex_attribute_layout;
-   
-   VertexAttributes() : position_array_ptr(nullptr), color_array_ptr(nullptr), normal_array_ptr(nullptr), 
-                        index_array_ptr(nullptr) , vertex_attribute_array_ptr(nullptr)                 
-   {
-      /* Constructor*/
-   }
-
-   ~VertexAttributes()
-   {
-      /* Destructor */
-      vertex_attribute_array.resize(0);
-   }
-
-   void set_vertex_attribute_array()
-   {  
-      if(this->vertex_attribute_array_ptr != nullptr) return; // That means Vertex Attribute Array is externally generated & it location is assigned
-         
-      uint32_t n = vertex_attribute_layout + 1; 
-      n = n > 3 ? 3 : n;    
-      
-      this->vertex_attribute_array.reserve(n*position_array_ptr->size());
-
-      if(this->vertex_attribute_array.capacity()){}
-      
-      for(size_t vertex_id = 0; vertex_id < position_array_ptr->size()*n; vertex_id += n)
-         {       
-            if(this->position_array_ptr != nullptr && this->position_array_ptr->size() != 0 )
-              {
-               this->vertex_attribute_array.push_back((*this->position_array_ptr)[vertex_id]);
-               this->vertex_attribute_array.push_back((*this->position_array_ptr)[vertex_id+1]);
-               this->vertex_attribute_array.push_back((*this->position_array_ptr)[vertex_id+2]);
-              }
-
-            if(vertex_attribute_layout == 1 || vertex_attribute_layout == 3 )
-              {           
-               if(this->color_array_ptr != nullptr && this->color_array_ptr->size() != 0 )
-                 {
-                   this->vertex_attribute_array.push_back((*this->color_array_ptr)[vertex_id]);
-                   this->vertex_attribute_array.push_back((*this->color_array_ptr)[vertex_id+1]);
-                   this->vertex_attribute_array.push_back((*this->color_array_ptr)[vertex_id+2]);
-                 }
-              }
-
-           if(vertex_attribute_layout == 2 || vertex_attribute_layout == 3 )
-             {
-              if(this->normal_array_ptr != nullptr && this->normal_array_ptr->size() != 0 )
-                {
-                 this->vertex_attribute_array.push_back((*this->normal_array_ptr)[vertex_id]);
-                 this->vertex_attribute_array.push_back((*this->normal_array_ptr)[vertex_id+1]);
-                 this->vertex_attribute_array.push_back((*this->normal_array_ptr)[vertex_id+2]);
-                }
-            }
-         }
-   } /* for loop for VA array end */
-}; // struct VertexAttributes
-
-VertexAttributes vertex_attributes;
-glm::mat4 model_matrix;
-
-};
+public :
+std::unordered_map<std::string, std::map<uint32_t, Renderer_API::RenderableEntity>> topo_surfaces,
+std::unordered_map<std::string, Renderer_API::RenderableEntity> topo_corners, topo_edges;
+}
 
 ```
 

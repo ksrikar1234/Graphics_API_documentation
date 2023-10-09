@@ -69,7 +69,8 @@ Existing RenderPipeline Structure & Configuration exists as
 - Create a wrapper class to encapsulate all `OpenGL 2.1` , `OpenGL 3.3` calls into a custom Renderer API & replace them. (Not an Elegant solution as i thought initially) 
 
 ### Permanent Solution :
-- Create a Proper `(RenderableEntity -> SceneRenderer)` abstraction system. Seperate the `Model_Data` `<->` `Renderer` properly.
+- Create a Proper `(RenderableEntity -> SceneRenderer)` abstraction system.
+- Seperate the `Model_Data` `<->` `Renderer` properly.
 - No Graphics API calls inside Model class should allowed
 - Use a Scene Class to manage
 - `Camera System.`

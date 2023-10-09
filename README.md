@@ -70,7 +70,7 @@ Existing RenderPipeline Structure & Configuration exists as
 - `Setiing Lighting Parameter & Properties.`
 - `Setting model Visibility flags.`
     
-## Renderer API Reference :
+## Renderer API Reference 
 - Create a gp_gui_class by inheriting the topology just like it is currently implemented & instead of maintaining a lot of variables , containers to store vertices, indices, color_data ,    
    surface_ids , etc 
 - Use [RenderableEntity](RenderableEntity_Class.md) class to group together all required data. 

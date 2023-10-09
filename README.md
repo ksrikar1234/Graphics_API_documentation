@@ -86,7 +86,15 @@ Example for setting corners:
 
 ```cpp
 
+topo_corners["assigned_corners"].setPrimitiveType(Renderer_API::PrimitiveType::POINTS);
 topo_corners["assigned_corners"].setVertexArray(vertexarray);
+
+topo_corners["assigned_corners"].setColorSchema(Renderer_API::ColorSchema::PER_VERTEX);
+
+float shininess;
+glm::vec3 ambient, diffuse, specular;
+
+topo_corners["assigned_corners"].setMaterialPty(ambient, diffuse, specular, shininess);
 topo_corners["assigned_corners"].setColorArray(colorarray);
 
 ```

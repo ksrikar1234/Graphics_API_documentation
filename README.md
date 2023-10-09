@@ -75,6 +75,7 @@ class gp_gui_topology : public topology
 {
 public :
 std::unordered_map<std::string, std::map<uint32_t, Renderer_API::RenderableEntity>> topo_surfaces,
+
 std::unordered_map<std::string, Renderer_API::RenderableEntity> topo_corners, topo_edges;
 
 // Member functions to create renderable entities and set flags
@@ -102,11 +103,11 @@ topo_corners["assigned_corners"].setMaterialPty(ambient, diffuse, specular, shin
 ```
 
 
-Example for setting corners:
+Example for setting other 3d linear surface segments:
 
 ```cpp
 
-(topo_surfaces["linear_surface_segments"]).[1].setPrimitiveType(Renderer_API::PrimitiveType::POINTS);
+topo_surfaces["linear_surface_segments"].[1].setPrimitiveType(Renderer_API::PrimitiveType::POINTS);
 topo_surfaces["linear_surface_segments"].[1].setVertexArray(vertexarray);
 
 topo_surfaces["linear_surface_segments"].[1].setColorSchema(Renderer_API::ColorSchema::PER_VERTEX);

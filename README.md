@@ -53,17 +53,23 @@ Existing RenderPipeline Structure & Configuration exists as
 ## Challenges in Porting
 - Models contain view methods like `model.render()`
 - Example : `topology.draw_surface_render()` which binds the model data structure to a render api paradigm.
-- Mild & Extreme Explicit API's like `OpenGL 3.3, OpenGL 4.3` & `Vulkan , DirectX` cannot be use in this manner.
+- Mild & Extreme Explicit API's like `OpenGL 3.3, OpenGL 4.3` & `Vulkan , DirectX` cannot be used in this manner.
 
      
 ## Solutions
 
 ### Temporary Solution : 
-- Create a wrapper class to encapsulate all `OpenGL 2.1` , `OpenGL 3.3` calls into a custom Renderer API 
+- Create a wrapper class to encapsulate all `OpenGL 2.1` , `OpenGL 3.3` calls into a custom Renderer API & replace them. (Not a Elegant solution as i thought initially) 
 
 ### Permanent Solution :
-- Create a Proper `(RenderableEntity -> SceneRenderer)` abstraction system.
-  
+- Create a Proper `(RenderableEntity -> SceneRenderer)` abstraction system. Seperate the `Model_Data` `<->` `Renderer` properly.
+- No Graphics API calls inside Model class should allowed
+- Use a Scene Class to manage
+- `Camera System.`
+- `Calculation of view-projection matrices.`
+- `Setiing Lighting Parameter & Properties.`
+- `Setting model Visibility flags.`
+    
 ## New Renderer_API Reference & Guidelines :
 - Create a gp_gui_class by inheriting the topology just like it is currently implemented & instead of maintaining a lot of variables , containers to store vertices, indices, color_data ,    
    surface_ids , etc 

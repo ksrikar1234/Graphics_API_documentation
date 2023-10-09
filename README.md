@@ -65,7 +65,8 @@ Existing RenderPipeline Structure & Configuration exists as
    Create a Proper `(RenderableEntity -> SceneRenderer)` abstraction system.
   
 ## New Renderer_API Reference & Guidelines :
-   Create a gp_gui_class by inheriting the topology just like it is currently implemented & instead of maintaining a lot of variables , containers to store vertices, indices, color_data , surface_ids , etc 
+   Create a gp_gui_class by inheriting the topology just like it is currently implemented & instead of maintaining a lot of variables , containers to store vertices, indices, color_data ,    
+   surface_ids , etc 
    use RenderableEntity class to group together all required data. 
    
 ```cpp
@@ -84,16 +85,28 @@ std::unordered_map<std::string, Renderer_API::RenderableEntity> topo_corners, to
 Example for setting corners:
 
 ```cpp
+
 topo_corners["assigned_corners"].setVertexArray(vertexarray);
 topo_corners["assigned_corners"].setColorArray(colorarray);
+
 ```
 
 In paintGL 
 
 ```cpp
+
 Gp_gui_topology & topology = Gp_gui_mainwindow::view() -> presenter() -> topology_model();
-std::vector<Renderer_API::RenderableEntity>& RenderableEntitiesList = topology.getRenderableEntities(); 
-Scene.Render(RenderableEntitiesList);
+
+if(topology.isUpdated())
+topology.updateRenderableEntities(); // ReEvaluate the RenderableEntities based on flags other wise cached data is rendered
+
+std::vector<Renderer_API::RenderableEntity>& Topo_RenderableEntitiesList = topology.getRenderableEntities(); 
+
+Scene.Render(Topo_RenderableEntitiesList, topology_display_flags);
+
+// Similarly for Grids, Cad Model, Control Net
+
+
 ```
 
 

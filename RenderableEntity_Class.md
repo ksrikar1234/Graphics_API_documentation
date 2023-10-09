@@ -36,7 +36,7 @@ enum class PrimitiveType         {POINTS, LINES, LINE_STRIP, TRIANGLES, TRIANGLE
 enum class ShadeModel            {FLAT , SMOOTH};
 enum class ColorSchema           {MONO, PER_PRIMITIVE, PER_VERTEX};
 enum class PolygonMode           {POINTS, LINES, FILL};
-enum class DisplayType           {NoDisplay, DisplayHLR, DisplayShade, DisplayShadeHLR, DisplayLines, DisplayPoints, DisplayFewPoints};
+enum class DisplayType           {NODisplay, DisplayHLR, DisplayShade, DisplayShadeHLR, DisplayLines, DisplayPoints, DisplayFewPoints};
 
 enum Visibility_Flag             {ENABLE, DISABLE};
 enum Material_Flag               {ENABLE, DISABLE};

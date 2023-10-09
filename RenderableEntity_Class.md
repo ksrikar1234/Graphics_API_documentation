@@ -84,12 +84,10 @@ void RenderableEntity::set_vertex_attribute_array()
    {  
       if(this->vertex_attribute_array_ptr != nullptr) return; // That means Vertex Attribute Array is externally generated & its location is assigned
          
-      uint32_t n = vertex_attribute_layout + 1; 
-      n = n > 3 ? 3 : n;    
-      
-      this->vertex_attribute_array.reserve(n*position_array_ptr->size());
+      uint32_t n = vertex_attribute_layout; 
+      n = n > 0 ? (n <= 2 ? 2 : 3) : 1; // Fancy way of saying layout of Vertex array = { {vertex} , {color} , {normal} } set of combinations { V , VC , VN , VCN}
 
-      if(this->vertex_attribute_array.capacity()){}
+      this->vertex_attribute_array.reserve(n*position_array_ptr->size());
       
       for(size_t vertex_id = 0; vertex_id < position_array_ptr->size()*n; vertex_id += n)
          {       

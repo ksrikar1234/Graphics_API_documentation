@@ -19,7 +19,7 @@ class Data_Base {
 uint64_t Assignable_UUID;
 std::unordered_map<uint64_t, RenderableEntity> RenderableEntities_DataBase;
 
- Data_Base() { Assignable_UUID = 0; } // Starting Assigned ID is = 0
+Data_Base() : Assignable_UUID(0) {} // Starting Assigned ID is = 0
 ~Data_Base() {}
 
 uint64_t addEntity(RenderableEntity& renderable_entity);
@@ -34,15 +34,21 @@ RenderableEntity* getEntity(uint64_t key);
 ```cpp
 
 namespace Renderer_API {
-uint64_t Data_Base::addEntity(RenderableEntity& renderable_entity)
-{
-  renderable_entity.UUID = Assignable_UUID;
-  Assignable_UUID++;
-  RenderableEntities_DataBase[renderable_entity.UUID] = &renderable_entity; 
-}
+    uint64_t Data_Base::addEntity(RenderableEntity renderable_entity) {
+        renderable_entity.UUID = Assignable_UUID;
+        RenderableEntities_DataBase[renderable_entity.UUID] = renderable_entity;
+        Assignable_UUID++;
+        return renderable_entity.UUID; // Return the assigned UUID
+    }
 
-RenderableEntity* Data_Base::getEntity(uint64_t key)
-{  return &RenderableEntities_DataBase[key]; }
+    RenderableEntity* Data_Base::getEntity(uint64_t key) {
+        auto it = RenderableEntities_DataBase.find(key);
+        if (it != RenderableEntities_DataBase.end()) {
+            return &(it->second);
+        }
+        return nullptr; // Entity with the given key not found
+    }
+} // namespace Renderer_API
 
-}
+
 ```

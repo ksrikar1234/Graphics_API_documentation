@@ -3,7 +3,7 @@
 ```cpp
 Renderer_API::Data_Base DataBase;
 uint64_t UniqueKey = DataBase.add(topo_corner["assigned_corners"]);
-DataBase.get(key);
+DataBase.getEntity(key);
 ```
 
 ## Class Prototype

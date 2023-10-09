@@ -18,9 +18,10 @@ std::unordered_map<uint64_t, RenderableEntity*> RenderableEntities_DataBase;
 ~Data_Base() {}
 
 uint64_t addEntity(RenderableEntity& renderable_entity);
-// overload add() to store other elements as well
-
 RenderableEntity* getEntity(uint64_t key);
+// overload addEntity() & getEntity() to store & retrive other types of Entity Objects as well
+
+
 
 };
 

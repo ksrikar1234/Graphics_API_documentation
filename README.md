@@ -50,8 +50,9 @@ Existing RenderPipeline Structure & Configuration exists as
   Gp_gui_minicad & cad_model =  Gp_gui_mainwindow::view() -> presenter() -> cad_model()
    ```    
 #### Rendering is done using a render method implemented in gp_gui_model class
--  `topology.draw_surface_displaylist()`
-
+```cpp
+  topology.draw_surface_displaylist()`
+```
 ## Challenges in Porting
 - Models contain view methods like `model.render()`
 - Example : `topology.draw_surface_render()` which binds the model data structure to a render api paradigm.

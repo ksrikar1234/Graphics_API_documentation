@@ -5,10 +5,10 @@ GridPro Graphics_API_Revamp_documentation.
 ## Table of Contents
 
 - [About](#about)
-- [Existing RenderPipeline](#prerequisites)
-- [Challenges in Porting](#challenges)
-- [Solutions](#examples)
-- [New Renderer_API Reference & Guidelines](#api-reference)
+- [Existing RenderPipeline](#existing-renderpipeline)
+- [Challenges in Porting](#challenges-in-porting)
+- [Solutions](#solutions)
+- [Renderer API Reference](#renderer-api-reference)
 
 
 ## About
@@ -16,14 +16,6 @@ GridPro Graphics_API_Revamp_documentation.
 To replace Fixed pipeline approach with shader approach in GridPro WS. 
 
 ## Existing RenderPipeline
-
-To install the HPS Application Framework, follow these steps:
-1. First, clone this repository to your local machine:
-```
-cd APP_Framework
-qmake app.pro -r
-make release -j 8
-```
 
 [Installation](Installation.md)
 
@@ -41,12 +33,7 @@ To get started with the HPS Application Framework, check out the [Getting Starte
   
 ## New Renderer_API Reference & Guidelines
 
-Renderer_API::Model
 Renderer_API::RenderableEntity
-
-
----
-
 
 ```cpp
 
@@ -135,34 +122,34 @@ struct VertexAttributes
       if(this->vertex_attribute_array.capacity()){}
       
       for(size_t vertex_id = 0; vertex_id < position_array_ptr->size()*n; vertex_id += n)
-        {       
-        if(this->position_array_ptr != nullptr && this->position_array_ptr->size() != 0 )
-           {
-              this->vertex_attribute_array.push_back((*this->position_array_ptr)[vertex_id]);
-              this->vertex_attribute_array.push_back((*this->position_array_ptr)[vertex_id+1]);
-              this->vertex_attribute_array.push_back((*this->position_array_ptr)[vertex_id+2]);
-           }
-
-        if(vertex_attribute_layout == 1 || vertex_attribute_layout == 3 )
-           {           
-            if(this->color_array_ptr != nullptr && this->color_array_ptr->size() != 0 )
+         {       
+            if(this->position_array_ptr != nullptr && this->position_array_ptr->size() != 0 )
               {
-                this->vertex_attribute_array.push_back((*this->color_array_ptr)[vertex_id]);
-                this->vertex_attribute_array.push_back((*this->color_array_ptr)[vertex_id+1]);
-                this->vertex_attribute_array.push_back((*this->color_array_ptr)[vertex_id+2]);
+               this->vertex_attribute_array.push_back((*this->position_array_ptr)[vertex_id]);
+               this->vertex_attribute_array.push_back((*this->position_array_ptr)[vertex_id+1]);
+               this->vertex_attribute_array.push_back((*this->position_array_ptr)[vertex_id+2]);
               }
-           }
 
-         if(vertex_attribute_layout == 2 || vertex_attribute_layout == 3 )
-           {
-            if(this->normal_array_ptr != nullptr && this->normal_array_ptr->size() != 0 )
-              {
-               this->vertex_attribute_array.push_back((*this->normal_array_ptr)[vertex_id]);
-               this->vertex_attribute_array.push_back((*this->normal_array_ptr)[vertex_id+1]);
-               this->vertex_attribute_array.push_back((*this->normal_array_ptr)[vertex_id+2]);
+            if(vertex_attribute_layout == 1 || vertex_attribute_layout == 3 )
+              {           
+               if(this->color_array_ptr != nullptr && this->color_array_ptr->size() != 0 )
+                 {
+                   this->vertex_attribute_array.push_back((*this->color_array_ptr)[vertex_id]);
+                   this->vertex_attribute_array.push_back((*this->color_array_ptr)[vertex_id+1]);
+                   this->vertex_attribute_array.push_back((*this->color_array_ptr)[vertex_id+2]);
+                 }
               }
-          }
-        }
+
+           if(vertex_attribute_layout == 2 || vertex_attribute_layout == 3 )
+             {
+              if(this->normal_array_ptr != nullptr && this->normal_array_ptr->size() != 0 )
+                {
+                 this->vertex_attribute_array.push_back((*this->normal_array_ptr)[vertex_id]);
+                 this->vertex_attribute_array.push_back((*this->normal_array_ptr)[vertex_id+1]);
+                 this->vertex_attribute_array.push_back((*this->normal_array_ptr)[vertex_id+2]);
+                }
+            }
+         }
    }
 }; // struct VertexAttributes
 
@@ -171,8 +158,8 @@ glm::mat4 model_matrix;
 
 };
 
-```cpp
----
+```
+
 
 If you encounter any issues or have questions, please don't hesitate to [open an issue](https://github.com/ksrikar1234/HPS_API_Documentation/issues) on GitHub.
 

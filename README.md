@@ -51,8 +51,8 @@ Existing RenderPipeline Structure & Configuration exists as
 
 
 ## Challenges in Porting
-
-
+- Models contain view methods like `model.render()`
+  Example : `topology.draw_surface_render()` which binds the model data structure to a render api paradigm 
 ## Solutions
 
 ### Temporary Solution : 

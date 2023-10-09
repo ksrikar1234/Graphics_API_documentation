@@ -43,7 +43,11 @@ enum Material_Flag               {ENABLE, DISABLE};
 enum Lighting_Flag               {ENABLE, DISABLE};
 enum VertexAttributeLayout       {V, VC, VN, VCN};
 
-		
+bool show_faces = false;
+bool show_edges = false;
+bool show_nodes = false;
+bool show_few_nodes = false;
+
 struct RenderableEntity {
 
 uint64_t UUID;

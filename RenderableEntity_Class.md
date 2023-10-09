@@ -18,6 +18,8 @@ linear_surface_segment.setVertexArray(vertex_array);
 linear_surface_segment.setColorArray(color_array);
 linear_surface_segment.setNormalArray(normal_array);
 
+topo_surfaces[linear_surface_segments][1] = linear_surface_segment;
+
 // Localised Namespace
 }
 

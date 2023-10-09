@@ -110,7 +110,7 @@ Example for setting other 3d linear surface segments:
 topo_surfaces["linear_surface_segments"][1].setPrimitiveType(Renderer_API::PrimitiveType::POINTS);
 topo_surfaces["linear_surface_segments"][1].setVertexArray(vertexarray);
 
-topo_surfaces["linear_surface_segments"][1].setColorSchema(Renderer_API::ColorSchema::PER_VERTEX);
+topo_surfaces["linear_surface_segments"][1].setColorSchema(Renderer_API::ColorSchema::PER_PRIMITIVE);
 
 float shininess;
 glm::vec3 ambient, diffuse, specular;

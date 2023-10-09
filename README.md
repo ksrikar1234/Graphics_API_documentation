@@ -73,7 +73,7 @@ Existing RenderPipeline Structure & Configuration exists as
 ## New Renderer_API Reference & Guidelines :
 - Create a gp_gui_class by inheriting the topology just like it is currently implemented & instead of maintaining a lot of variables , containers to store vertices, indices, color_data ,    
    surface_ids , etc 
-- Use RenderableEntity class to group together all required data. 
+- Use RenderableEntity[./RenderableEntity_Class.md] class to group together all required data. 
    
 ```cpp
 

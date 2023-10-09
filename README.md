@@ -30,7 +30,7 @@ Existing RenderPipeline Structure & Configuration exists as
    ```
 
    ```cpp
-   Gp_gui_multiblock_grid_list & gp_grids Gp_gui_mainwindow::view() -> presenter() -> grid_model()
+   Gp_gui_multiblock_grid_list & gp_grids = Gp_gui_mainwindow::view() -> presenter() -> grid_model()
    Gp_gui_multiblock_grid * curr_grid = gp_grids.get_current_grid();
    ```
    

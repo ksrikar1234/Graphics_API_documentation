@@ -61,7 +61,7 @@ struct Material_pty
    Material_Flag material_flag
    float color;
    float shininess;
-   glm::vec3 ambient, diffuse , specular;
+   float ambient[3], diffuse[3] , specular[3];
 };
 
 Material_pty material_pty;
@@ -69,7 +69,7 @@ Material_pty material_pty;
 uint32_t vertex_buffer_object_id;
 uint32_t vertex_array_object_id;
 uint32_t shader_program_handle_id;
-glm::mat4 model_matrix;
+float model_matrix[4][4];
 
 struct VertexAttributes 
 {

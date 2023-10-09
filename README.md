@@ -32,10 +32,10 @@ Existing RenderPipeline Structure & Configuration exists as
    a new model data structure is built by inheriting base topology data structure & additionally data members & methods are created
    for rendering all aspects, properties of topology model.
    
-##### Each gp_gui_model is derived from a core data structure that contain the actual buisness logic
+#### Each gp_gui_model is derived from a core data structure that contain the actual buisness logic
 -  Get avaliable gp_gui_model from `Gp_gui_mainwindow::view() -> presenter();`
 
-##### Example :
+#### Example :
    For topology
    ```cpp
    Gp_gui_topology & topology = Gp_gui_mainwindow::view() -> presenter() -> topology_model();
@@ -49,6 +49,8 @@ Existing RenderPipeline Structure & Configuration exists as
    ```cpp
   Gp_gui_minicad & cad_model =  Gp_gui_mainwindow::view() -> presenter() -> cad_model()
    ```    
+#### Rendering is done using a render method implemented in gp_gui_model class
+-  `topology.draw_surface_displaylist()`
 
 ## Challenges in Porting
 - Models contain view methods like `model.render()`

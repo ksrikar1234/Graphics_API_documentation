@@ -8,7 +8,7 @@ topo_corners["assigned_corners"].setVertexArray(vertex_array);
 // Set some other data as well
 
 uint64_t assigned_corners_entity_key = DataBase.addEntity(topo_corners["assigned_corners"]);
-DataBase.getEntity(assigned_corners_entity_key)->vertex_array_ptr;;
+DataBase.getEntity(assigned_corners_entity_key)->vertex_array_ptr;
 ```
 
 ## Class Prototype

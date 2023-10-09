@@ -145,7 +145,7 @@ void RenderableEntity::set_vertex_attribute_array()
 
       this->vertex_attribute_array.reserve(n*position_array_ptr->size()); // Reserve Enough memory
       
-      for(size_t vertex_id = 0; vertex_id < position_array_ptr->size()*n; vertex_id += n)
+      for(size_t vertex_id = 0; vertex_id < position_array_ptr->size()*n; vertex_id += n*3)
          {       
             if(n>=0)
               {

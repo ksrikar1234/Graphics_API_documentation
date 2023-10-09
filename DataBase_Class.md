@@ -1,4 +1,4 @@
-# RenderableEnties_Data_Base_Class 
+# Renderer_API::Data_Base Class 
 ## Usage 
 ```cpp
 Renderer_API::Data_Base DataBase;

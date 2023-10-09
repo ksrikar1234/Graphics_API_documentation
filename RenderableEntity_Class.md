@@ -4,13 +4,15 @@
 
 namespace Renderer_API {
 
-enum class Visibility            {TRUE, FALSE};
+
 enum class PrimitiveType         {POINTS, LINES, LINE_STRIP, TRIANGLES, TRIANGLE_STRIP, QUADS, QUAD_STRIP };
 enum class ShadeModel            {FLAT , SMOOTH};
 enum class ColorSchema           {MONO, PER_PRIMITIVE, PER_VERTEX};
 enum class PolygonMode           {POINTS, LINES, FILL};
-enum class Material              {ENABLE, DISABLE};
-enum class Lighting              {ENABLE, DISABLE};
+
+enum Visibility_Flag             {ENABLE, DISABLE};
+enum Material_Flag               {ENABLE, DISABLE};
+enum Lighting_Flag               {ENABLE, DISABLE};
 enum VertexAttributeLayout       {V, VC, VN, VCN};
 
 struct RenderableEntity {
@@ -24,7 +26,7 @@ uint32_t vertex_array_object_id;
 uint32_t shader_program_handle_id;
 glm::mat4 model_matrix;
 
-Visibility visibility;
+Visibility_Flag visibility;
 PrimitiveType primitive_type;
 ShadeModel shade_model;
 PolygonMode polygon_mode;
@@ -32,7 +34,7 @@ float primitive_thickness;
 
 struct Material_pty
 {
-   Material material_flag
+   Material_Flag material_flag
    float color;
    float shininess;
    glm::vec3 ambient, diffuse , specular;
@@ -75,6 +77,8 @@ void set_vertex_attribute_array();
 
 
 ```cpp
+
+namespcae Renderer_API {
 
 void RenderableEntity::set_vertex_attribute_array()
    {  
@@ -119,5 +123,6 @@ void RenderableEntity::set_vertex_attribute_array()
    } /* for loop for VA array end */
 }; // struct VertexAttributes
 
+}
 ```
 

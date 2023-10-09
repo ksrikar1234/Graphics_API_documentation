@@ -17,7 +17,42 @@ To replace Fixed pipeline approach with shader approach in GridPro WS.
 
 ## Existing RenderPipeline
 
-[Installation](Installation.md)
+Existing RenderPipeline Structure & Configuration exists as
+
+- gp_gui_glwidget class
+- paintGL 
+- Get avaliable gp_gui_model from Gp_gui_mainwindow::view() -> presenter();
+### Each gp_gui_model is derived from a core data structure that contain the actual buisness logic
+### Example :
+
+   ```cpp
+   Gp_gui_mainwindow::view() -> presenter() -> topology_model();
+   ```
+
+   ```cpp
+   Gp_gui_multiblock_grid_list & gp_grids Gp_gui_mainwindow::view() -> presenter() -> grid_model()
+   Gp_gui_multiblock_grid * curr_grid = gp_grids.get_current_grid();
+   ```
+   
+   ```cpp
+   Gp_gui_mainwindow::view() -> presenter() -> cad_model()
+   ```    
+
+  
+ 
+
+Primary Data Structures : 
+
+
+
+Surface
+Topology
+Grid
+cad_model
+Data is 
+
+
+
 
 ## Challenges in Porting
 
@@ -26,7 +61,7 @@ To get started with the HPS Application Framework, check out the [Getting Starte
 ## Solutions
 
 ### Temporary Solution : 
-    Create a wrapper class to encapsulate all draw calls
+    Create a wrapper class to encapsulate all OpenGL 2.1 , OpenGL 3.3 calls into a custom Renderer API 
 
 ### Permanent Solution :
     Create a Proper (RenderableEntity -> SceneRenderer) abstraction system.
@@ -48,7 +83,7 @@ uint32_t vertex_array_object_id;
 uint32_t shader_program_handle_id;
 
 enum class Visibility            {TRUE, FALSE};
-enum class PrimitiveType         {POINTS, LINES, LINE_STRIP , TRIANGLES , TRIANGLE_STRIP , QUAD};
+enum class PrimitiveType         {POINTS, LINES, LINE_STRIP, TRIANGLES, TRIANGLE_STRIP, QUADS, QUAD_STRIP };
 enum class ShadeModel            {FLAT , SMOOTH};
 enum class ColorSchema           {MONO, PER_PRIMITIVE, PER_VERTEX};
 enum class PolygonMode           {POINTS, LINES, FILL};
@@ -107,12 +142,11 @@ struct VertexAttributes
    {
       /* Destructor */
       vertex_attribute_array.resize(0);
-     
    }
 
    void set_vertex_attribute_array()
    {  
-      if(this->vertex_attribute_array_ptr != nullptr) return;
+      if(this->vertex_attribute_array_ptr != nullptr) return; // That means Vertex Attribute Array is externally generated & it location is assigned
          
       uint32_t n = vertex_attribute_layout + 1; 
       n = n > 3 ? 3 : n;    
@@ -150,7 +184,7 @@ struct VertexAttributes
                 }
             }
          }
-   }
+   } /* for loop for VA array end */
 }; // struct VertexAttributes
 
 VertexAttributes vertex_attributes;

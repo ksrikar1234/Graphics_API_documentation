@@ -32,7 +32,7 @@ std::vector<float>* BuildVertexArray(std::vector<float>* position, std::vector<f
 
 
 ## Class Methods Implementation
-- `BuildVertexArray(<args>)` method implementation
+- `std::vector<float>* BuildVertexArray(<args>)` method implementation
 
 ```cpp
 

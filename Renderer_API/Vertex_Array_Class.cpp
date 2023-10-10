@@ -14,23 +14,21 @@ std::vector<float>* VertexArray::BuildVertexArray(std::vector<float>* position =
            && "Set Layout of VertexArray.layout = Renderer_API::VertexArray::<args = {V, VC, VN, VCN}>");
     assert(position != nullptr && "No Positon array is given");
 
-    if(this->layout = 2 || this->layout = 4) {
+    if(this->layout == 2 || this->layout == 4) {
        assert(color != nullptr
               && "Color Array data not given but Layout is set to load Color Data [VC] or [VCN]");
-       assert(color->size() = position->size()
+       assert(color->size() == position->size()
              && "Sizeof ColorArrayData != Sizeof PositionArrayData"); 
      }
 
-    if(this->layout = 3 || this->layout = 4) {
+    if(this->layout == 3 || this->layout == 4) {
        assert(normal != nullptr
               && "Normal Array data not given but Layout is set to load Normal Data [VN] or [VCN]");
-       assert(normal->size() = position->size()
+       assert(normal->size() == position->size()
               && "Sizeof NormalArrayData != Sizeof PositionArrayData"); 
     }
 
-   uint32_t n = (layout > 1) ? (layout > 3 ? 3 : 2) : 1 ;
-  
-    for(size_t vertex_id = 0; vertex_id < n*position->size(); ++vertex_id )
+    for(std::size_t vertex_id = 0; vertex_id < (position->size())/3; ++vertex_id )
        {
          this->vertex_array.push_back((*position)[vertex_id+0]);
          this->vertex_array.push_back((*position)[vertex_id+1]);
@@ -38,19 +36,21 @@ std::vector<float>* VertexArray::BuildVertexArray(std::vector<float>* position =
 
          if(color != nullptr)
            {
-             this->vertex_array.push_back((*color)[vertex_id+3]);
-             this->vertex_array.push_back((*color)[vertex_id+4]);
-             this->vertex_array.push_back((*color)[vertex_id+5]);
+             this->vertex_array.push_back((*color)[vertex_id+0]);
+             this->vertex_array.push_back((*color)[vertex_id+1]);
+             this->vertex_array.push_back((*color)[vertex_id+2]);
            }
 
          if(normal != nullptr)
            {
-             this->vertex_array.push_back((*normal)[vertex_id+6]);
-             this->vertex_array.push_back((*normal)[vertex_id+7]);
-             this->vertex_array.push_back((*normal)[vertex_id+8]);
+             this->vertex_array.push_back((*normal)[vertex_id+0]);
+             this->vertex_array.push_back((*normal)[vertex_id+1]);
+             this->vertex_array.push_back((*normal)[vertex_id+2]);
            }
 
-       }     
-}
+       } 
+       
+     return &this->vertex_array;     
+};
+}// namespace Renderer_API
 #endif
-

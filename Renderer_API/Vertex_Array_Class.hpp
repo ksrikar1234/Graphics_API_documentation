@@ -1,5 +1,5 @@
 #ifndef _VERTEX_ARRAY_CLASS_HPP_
-#def _VERTEX_ARRAY_CLASS_HPP_
+#define _VERTEX_ARRAY_CLASS_HPP_
 namespace Renderer_API {
 
 class VertexArray {
@@ -16,3 +16,4 @@ std::vector<float>* BuildVertexArray(std::vector<float>* position, std::vector<f
 
 };
 } // namespace Renderer_API
+#endif

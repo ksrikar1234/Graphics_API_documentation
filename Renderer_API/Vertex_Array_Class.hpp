@@ -1,5 +1,6 @@
 #ifndef _VERTEX_ARRAY_CLASS_HPP_
 #define _VERTEX_ARRAY_CLASS_HPP_
+#include <cstdint>
 #include <vector>
 namespace Renderer_API {
 
@@ -12,7 +13,7 @@ AttribLayout layout;
 ~VertexArray() {}
 
 std::vector<float> vertex_array;
-bool setLayout(Renderer_API::VertexArray::AttribLayout input_layout) : layout(input_layout) {}
+bool setLayout(AttribLayout input_layout)  {  this->layout = input_layout ; return (input_layout > 0 ? true : false); }
 std::vector<float>* BuildVertexArray(std::vector<float>* position, std::vector<float>* color, std::vector<float>* normal);
 
 }; // class VertexArray

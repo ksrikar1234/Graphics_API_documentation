@@ -68,11 +68,11 @@ Vertex operator[](uint32_t index)
  {
    vertex.position[i] = this->vertex_array[index*stride_len + i];
    if(layout == 2 || layout == 4) 
-   vertex.color[i]    = this->vertex_array[index*stride_len + 3 + i]; // color offset = 3 
+     vertex.color[i]  = this->vertex_array[index*stride_len + 3 + i]; // color offset = 3 
    if(layout == 3)
-   vertex.normal[i]   = this->vertex_array[index*stride_len + 3 + i]; // normal offset = 3
+     vertex.normal[i] = this->vertex_array[index*stride_len + 3 + i]; // normal offset = 3
    if(layout == 4)
-   vertex.normal[i]   = this->vertex_array[index*stride_len + 6 + i]; // normal offset = 6
+     vertex.normal[i] = this->vertex_array[index*stride_len + 6 + i]; // normal offset = 6
  }
  
  vertex.update();

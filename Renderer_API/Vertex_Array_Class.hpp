@@ -80,8 +80,6 @@ Vertex operator[](uint32_t index)
  return vertex;
 }
 
-
-
 }; // class VertexArray
 } // namespace Renderer_API
 #endif  // _VERTEX_ARRAY_CLASS_HPP_

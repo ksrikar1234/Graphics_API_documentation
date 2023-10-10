@@ -83,7 +83,6 @@ float* getPosition() { return this->position;}
 float* getColor()    { return this->color;   }
 float* getNormal()   { return this->normal;  }
 
-
 bool update();
 bool setLayout(AttribLayout input_layout);
 
@@ -94,16 +93,16 @@ bool setNormal(float n1, float n2, float n3);
 bool updatePosition(float x, float y, float z); 
 bool updateColor(float r, float g, float b); 
 bool updateNormal(float n1, float n2, float n3);
-
 };
 
 Vertex curr_vertex;
-
 std::vector<float> vertex_array;
 bool setLayout(AttribLayout input_layout)  {  this->layout = input_layout ; return (input_layout > 0 ? true : false); }
-std::vector<float>* BuildVertexArray(std::vector<float>* position, std::vector<float>* color, std::vector<float>* normal);
-bool push_back(Vertex vertex);
 
+std::vector<float>* BuildVertexArray(std::vector<float>* position, std::vector<float>* color, std::vector<float>* normal);
+std::vector<float>* UpdateVertexArray(std::vector<float>* position, std::vector<float>* color, std::vector<float>* normal);
+
+bool push_back(Vertex vertex);
 
 Vertex operator[](uint32_t index)
 {
@@ -119,11 +118,11 @@ Vertex operator[](uint32_t index)
  {
    vertex.position[i] = this->vertex_array[index*stride_len + i];
    if(layout == 2 || layout == 4) 
-     vertex.color[i]  = this->vertex_array[index*stride_len + 3 + i]; // color offset = 3 
+   vertex.color[i]    = this->vertex_array[index*stride_len + 3 + i]; // color offset = 3 
    if(layout == 3)
-     vertex.normal[i] = this->vertex_array[index*stride_len + 3 + i]; // normal offset = 3
+   vertex.normal[i]   = this->vertex_array[index*stride_len + 3 + i]; // normal offset = 3
    if(layout == 4)
-     vertex.normal[i] = this->vertex_array[index*stride_len + 6 + i]; // normal offset = 6
+   vertex.normal[i]   = this->vertex_array[index*stride_len + 6 + i]; // normal offset = 6
  }
  
  vertex.update();

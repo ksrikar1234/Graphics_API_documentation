@@ -2,12 +2,12 @@
 ## Usage 
 ```cpp
 Renderer_API::Data_Base DataBase;
-Renderer_API::RenderableEntity topo_corners;
+Renderer_API::RenderableEntity assign_topo_corners;
 
-topo_corners["assigned_corners"].setVertexArray(vertex_array);
+topo_corners.setVertexArray(vertex_array);
 // Set some other data as well
 
-uint64_t assigned_corners_entity_key = DataBase.addEntity(topo_corners["assigned_corners"]);
+uint64_t assigned_corners_entity_key = DataBase.addEntity(assign_topo_corners);
 DataBase.getEntity(assigned_corners_entity_key)->vertex_array_ptr;
 ```
 

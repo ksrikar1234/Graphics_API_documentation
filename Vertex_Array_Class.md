@@ -1,12 +1,17 @@
 ## Usage
 ```cpp
 
-Renderer_API::VertexArray TopoSurfaceVertexAttribArray;
-TopoSurfaceVertexAttribArray.setVertexArray(&position_array, &color_array,  &normal_araay);
-TopoSurfaceVertexAttribArray[1].getPosition();
+Renderer_API::VertexArray TopoSurfaceVertexArray;
+TopoSurfaceVertexArray.setLayout(Renderer_API::VertexArray::AttribLayout::VCN);
 
-float x, y ,z;
-TopoSurfaceVertexAttribArray[1].setPosition(x, y, z);
+std::vector<float> pos , norm , color;
+pos.push_back(1); pos.push_back(2); pos.push_back(3);
+norm.push_back(3); norm.push_back(4); norm.push_back(5);
+color.push_back(5); color.push_back(5); color.push_back(5);
+
+TopoSurfaceVertexArray.BuildVertexArray(&pos, &color, &norm); // its ok to destroy pos, norm, color vectors
+float* x = TopoSurfaceVertexArray[0].getColor();
+TopoSurfaceVertexArray[1].setColor(2,2,2);
 
 ```
 

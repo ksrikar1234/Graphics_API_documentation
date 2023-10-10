@@ -47,9 +47,14 @@ dummy_vertex.setNormal(0,0,0);
 TopoSurfaceVertexArray.push_back(dummy_vertex);
 
 ```
-- Update the VertexArray efficiently (Use it as much as possible to update the vertex array.)
+- Update using update"<Attrib>"() (Use this for small updates)
 ```cpp
 TopoSurfaceVertexArray[0].updateColor(2,2,2);
+```
+- Update using UpdateVertexArray() (Use this for large updates.)
+```cpp
+std::vector<float> new_color = {3,4,5},
+TopoSurfaceVertexArray.UpdateVertexArray(nullptr, new_color, nullptr);
 ```
 
 ## Class Protoype

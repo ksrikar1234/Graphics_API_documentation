@@ -2,7 +2,6 @@
 #define _VERTEX_ARRAY_CLASS_HPP_
 #include <cstdint>
 #include <vector>
-#include <iostream>
 
 namespace Renderer_API {
 class VertexArray {

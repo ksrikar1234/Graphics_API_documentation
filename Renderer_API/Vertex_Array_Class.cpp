@@ -51,6 +51,7 @@ std::vector<float>* VertexArray::BuildVertexArray(std::vector<float>* position =
        } 
        
      return &this->vertex_array;     
-};
+}
+
 }// namespace Renderer_API
 #endif

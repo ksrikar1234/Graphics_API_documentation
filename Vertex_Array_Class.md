@@ -2,6 +2,9 @@
 - Declare `Renderer_API::VertexArray`
 ```cpp
 Renderer_API::VertexArray TopoSurfaceVertexArray;
+```
+- Set Layout of VertexArray. { NONE, V, VC, VN & VCN } are availiable options
+```cpp
 TopoSurfaceVertexArray.setLayout(Renderer_API::VertexArray::AttribLayout::VCN);
 ```
 - Create or Set Vertex Data

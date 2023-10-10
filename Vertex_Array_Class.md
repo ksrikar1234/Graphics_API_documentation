@@ -21,7 +21,7 @@ float* x = TopoSurfaceVertexArray[0].getColor();
 ```
 - Update the VertexArray efficiently
 ```cpp
-TopoSurfaceVertexArray[1].setColor(2,2,2);
+TopoSurfaceVertexArray[0].setColor(2,2,2);
 ```
 
 ## Class Protoype

@@ -19,9 +19,19 @@ TopoSurfaceVertexArray.BuildVertexArray(&pos, &color, &norm); // its ok to destr
 ```cpp
 float* x = TopoSurfaceVertexArray[0].getColor();
 ```
-- Update the VertexArray efficiently
+- Push New Vertex (not recomended for high number of push_backs, Use BuildVertexArray() for constructing large portions of array)
 ```cpp
-TopoSurfaceVertexArray[0].setColor(2,2,2);
+Renderer_API::VertexArray::Vertex dummy_vertex;
+dummy_vertex.setLayout(Renderer_API::VertexArray::AttribLayout::VCN);
+dummy_vertex.setPosition(2,3,4);
+dummy_vertex.setColor(9,9,9);
+dummy_vertex.setNormal(0,0,0);
+TopoSurfaceVertexArray.push_back(dummy_vertex);
+
+```
+- Update the VertexArray efficiently (Use it as much as possible to update the vertex array.)
+```cpp
+TopoSurfaceVertexArray[0].updateColor(2,2,2);
 ```
 
 ## Class Protoype

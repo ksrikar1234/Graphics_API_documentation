@@ -66,11 +66,12 @@ TopoSurfaceVertexArray.UpdateVertexArray(nullptr, new_color, nullptr);
 namespace Renderer_API {
 class VertexArray {
 public :
-enum AttribLayout { NONE, V, VC, VN, VCN };
-AttribLayout layout;
-
  VertexArray() : layout(AttribLayout::NONE) {}
 ~VertexArray() {}
+
+enum AttribLayout { NONE, V, VC, VN, VCN };
+AttribLayout layout;
+bool setLayout(AttribLayout input_layout)  {  this->layout = input_layout ; return (input_layout > 0 ? true : false); }
 
 struct Vertex {
 
@@ -92,8 +93,9 @@ float* getPosition() { return this->position;}
 float* getColor()    { return this->color;   }
 float* getNormal()   { return this->normal;  }
 
-bool update();
 bool setLayout(AttribLayout input_layout);
+
+bool updateAliases();
 
 bool setPosition(float x, float y, float z); 
 bool setColor(float r, float g, float b); 
@@ -102,18 +104,19 @@ bool setNormal(float n1, float n2, float n3);
 bool updatePosition(float x, float y, float z); 
 bool updateColor(float r, float g, float b); 
 bool updateNormal(float n1, float n2, float n3);
-}; // Struct Vertex
+
+bool updateArray();
+};
 
 Vertex curr_vertex;
-std::vector<float> vertex_array;
-bool setLayout(AttribLayout input_layout)  {  this->layout = input_layout ; return (input_layout > 0 ? true : false); }
 
+std::vector<float> vertex_array;
 std::vector<float>* BuildVertexArray(std::vector<float>* position, std::vector<float>* color, std::vector<float>* normal);
 std::vector<float>* UpdateVertexArray(std::vector<float>* position, std::vector<float>* color, std::vector<float>* normal);
 
 bool push_back(Vertex vertex);
 
-Vertex operator[](uint32_t index)
+Vertex& operator[](uint32_t index)
 {
  uint32_t n = (this->layout > 1) ? (this->layout > 3 ? 3 : 2) : 1;
  uint32_t stride_len = n*3;
@@ -133,8 +136,7 @@ Vertex operator[](uint32_t index)
    if(layout == 4)
    vertex.normal[i]   = this->vertex_array[index*stride_len + 6 + i]; // normal offset = 6
  }
- 
- vertex.update();
+ vertex.updateAliases();
  return vertex;
 }
 

@@ -1,5 +1,6 @@
 #ifndef _VERTEX_ARRAY_CLASS_CPP_
 #define _VERTEX_ARRAY_CLASS_CPP_
+
 namespace Renderer_API {
 
 std::vector<float>* VertexArray::BuildVertexArray(std::vector<float>* position = nullptr,

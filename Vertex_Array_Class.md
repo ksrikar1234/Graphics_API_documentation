@@ -14,9 +14,9 @@ std::vector<float> pos = {1,2,3}, norm = {1,2,3}, color = {1,2,3};
 TopoSurfaceVertexArray.BuildVertexArray(&pos, &color, &norm); // its ok to destroy pos, norm, color vectors
 ```
 - Get Attribute Data by using Vertex Data structure
-  ```cpp
-  Renderer_API::VertexArray::Vertex vertex = TopoSurfaceVertexArray[0];
-  ```
+```cpp
+Renderer_API::VertexArray::Vertex vertex = TopoSurfaceVertexArray[0];
+```
 - Get Attribute Data by indexing
 ```cpp
 float* x = TopoSurfaceVertexArray[0].getColor();

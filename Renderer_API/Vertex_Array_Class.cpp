@@ -47,9 +47,66 @@ std::vector<float>* VertexArray::BuildVertexArray(std::vector<float>* position =
              this->vertex_array.push_back((*normal)[vertex_id+1]);
              this->vertex_array.push_back((*normal)[vertex_id+2]);
            }
-
        } 
+  
      return &this->vertex_array;     
+}
+
+
+std::vector<float>* VertexArray::UpdateVertexArray(std::vector<float>* position = nullptr, std::vector<float>* color = nullptr, std::vector<float>* normal = nullptr)
+{   
+     const uint32_t n = (this->layout > 1) ? (this->layout > 3 ? 3 : 2) : 1;
+     
+     if(layout == 1)  {
+       if(position != nullptr)
+         assert(position->size() == vertex_array.size()/n);
+       }
+     
+     if(layout == 2 || layout == 4) {
+       if(color != nullptr)
+         assert(color->size() == vertex_array.size()/n);
+      }
+      
+     if(layout == 3 || layout == 4) { 
+       if(normal != nullptr)
+       assert(normal->size() == vertex_array.size()/n);
+     }
+  
+      for(std::size_t vertex_id = 0; vertex_id < (vertex_array.size())/(3*n); ++vertex_id )
+       {
+         if(layout == 1) 
+         if(position != nullptr) {
+           this->vertex_array[vertex_id+0]  = (*position)[vertex_id+0];
+           this->vertex_array[vertex_id+1] =  (*position)[vertex_id+1];
+           this->vertex_array[vertex_id+2] =  (*position)[vertex_id+2];
+         }
+         
+         if(layout == 2 || layout == 4)
+         if(color != nullptr)
+           {
+             this->vertex_array[vertex_id + 3] = (*color)[vertex_id+0];
+             this->vertex_array[vertex_id + 4] = (*color)[vertex_id+1];
+             this->vertex_array[vertex_id + 5] = (*color)[vertex_id+2];
+            
+             if(layout == 3)     
+             if(normal != nullptr)
+             {
+              this->vertex_array[vertex_id + 6] = (*normal)[vertex_id+0];
+              this->vertex_array[vertex_id + 7] = (*normal)[vertex_id+1];
+              this->vertex_array[vertex_id + 8] = (*normal)[vertex_id+2];
+             }
+           }
+           
+         if(layout == 4)  
+         if(normal != nullptr)
+            {
+             this->vertex_array[vertex_id + 3] = (*normal)[vertex_id+0];
+             this->vertex_array[vertex_id + 4] = (*normal)[vertex_id+1];
+             this->vertex_array[vertex_id + 5] = (*normal)[vertex_id+2];
+            } 
+       } 
+       
+    return &this->vertex_array;   
 }
 
 bool VertexArray::push_back(Vertex vertex)
@@ -73,13 +130,17 @@ bool VertexArray::push_back(Vertex vertex)
     this->vertex_array.push_back(vertex.normal[1]);
     this->vertex_array.push_back(vertex.normal[2]);
    }
-   return true; 
+   
+   return true;
+   
 }
+
 
 bool VertexArray::Vertex::setLayout(AttribLayout input_layout) {
  this->layout = input_layout;
  return true;
 }
+
 
 bool VertexArray::Vertex::update()
 {
@@ -101,22 +162,24 @@ bool VertexArray::Vertex::setPosition(float x, float y, float z)
 
 bool VertexArray::Vertex::setColor(float r, float g, float b) 
 {
+  
  if(layout == 2 || layout == 4) {
  this->r = r;  this->g = g;  this->b = b;
  this->color[0] = r; this->color[1] = g; this->color[2] = b;
  return true;
  }
-return false;
+ return false;
 }
 
 bool VertexArray::Vertex::setNormal(float n1, float n2, float n3)
 {
- if(layout == 3 || layout == 4) {
- this->n1 = n1;  this->n2 = n2;  this->n3 = n3;
- this->normal[0] = n1; this->normal[1] = n2; this->normal[2] = n3;
+  if(layout == 3 || layout == 4) {
+  this->n1 = n1;  this->n2 = n2;  this->n3 = n3;
+  this->normal[0] = n1; this->normal[1] = n2; this->normal[2] = n3;
+
  return true;
  }
-return false; 
+ return false; 
 }
 
 bool VertexArray::Vertex::updatePosition(float x, float y, float z) 
@@ -125,13 +188,13 @@ bool VertexArray::Vertex::updatePosition(float x, float y, float z)
  const uint32_t n = (this->layout > 1) ? (this->layout > 3 ? 3 : 2) : 1;
  const uint32_t stride_len = n*3;
  const uint32_t offset = 0 ;
-   
+ 
  for(std::size_t i = 0 ; i < 3 ; ++i) {
    (*(this->vertex_array_head))[index*stride_len + i + offset] = this->position[i];
  }
  return true;
  }
-return false;
+ return false;
 }
 
 bool VertexArray::Vertex::updateColor(float r, float g, float b) 
@@ -146,22 +209,23 @@ bool VertexArray::Vertex::updateColor(float r, float g, float b)
  }
  return true;
  }
-return false;
+ return false;
 }
 
 bool VertexArray::Vertex::updateNormal(float n1, float n2, float n3) 
 {
  if(layout == 3 || layout == 4) {
+ 
  const uint32_t n = (this->layout > 1) ? (this->layout > 3 ? 3 : 2) : 1;
  const uint32_t stride_len = n*3;
  const uint32_t offset = (layout == 3) ? 3 : 6 ;
    
- for(std::size_t i = 0 ; i < 3 ; ++i) {
+ for(std::size_t i = 0 ; i < 3 ; ++i) { 
    (*(this->vertex_array_head))[index*stride_len + offset + i] = this->normal[i];
  }
  return true;
  }
-return false; 
+ return false; 
 }
 
 }// namespace Renderer_API

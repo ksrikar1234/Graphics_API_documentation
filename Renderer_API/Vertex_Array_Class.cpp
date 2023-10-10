@@ -224,7 +224,6 @@ bool VertexArray::Vertex::updateColor(float r, float g, float b)
 bool VertexArray::Vertex::updateNormal(float n1, float n2, float n3) 
 {
  if(layout == 3 || layout == 4) {
- 
  const uint32_t n = (this->layout > 1) ? (this->layout > 3 ? 3 : 2) : 1;
  const uint32_t stride_len = n*3;
  const uint32_t offset = (layout == 3) ? 3 : 6 ;

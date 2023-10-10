@@ -7,10 +7,10 @@ namespace ShaderSources{
 /*
      Valid Shader combinations
      +---------------------------------------------------------------+
-     NO LIGHT & NO MATERIAL SHADERS :   
+     NO LIGHT & NO MATERIAL SHADERS : FLAT_SHADING  
      (vc_vertex_shader ||  v_vertex_shader) + vc_fragment_shader;
      +---------------------------------------------------------------+
-     LIGHTING SHADERS + MATERIAL :
+     LIGHTING SHADERS + MATERIAL : SMOOTH_SHADING
      (vcn_vertex_shader ||  vn_vertex_shader) + vcn_fragment_shader;
      +---------------------------------------------------------------+
 

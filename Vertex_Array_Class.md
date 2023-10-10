@@ -6,10 +6,8 @@ TopoSurfaceVertexArray.setLayout(Renderer_API::VertexArray::AttribLayout::VCN);
 ```
 - Create or Set Vertex Data
 ```cpp
-std::vector<float> pos , norm , color;
-pos.push_back(1); pos.push_back(2); pos.push_back(3);
-norm.push_back(3); norm.push_back(4); norm.push_back(5);
-color.push_back(5); color.push_back(5); color.push_back(5);
+std::vector<float> pos = {1,2,3}, norm = {1,2,3}, color = {1,2,3};
+
 ```
 - Build the VertexArray
 ```cpp

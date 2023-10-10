@@ -1,21 +1,20 @@
 #ifndef _RENDERER_IN_BUILT_SHADER_SOURCES_
 #define _RENDERER_IN_BUILT_SHADER_SOURCES_
 
-namespace OpenGL_3_3_API {
-namespace Renderer {
+namespace Renderer_API {
 namespace ShaderSources{
 
 /*
      Valid Shader combinations
-     
+     +---------------------------------------------------------------+
      NO LIGHT & NO MATERIAL SHADERS :   
      (vc_vertex_shader ||  v_vertex_shader) + vc_fragment_shader;
-
+     +---------------------------------------------------------------+
      LIGHTING SHADERS + MATERIAL :
      (vcn_vertex_shader ||  vn_vertex_shader) + vcn_fragment_shader;
+     +---------------------------------------------------------------+
 
 */
-
 //------------------------------------------For Corner groups, Edges---------------------------------------------------------------+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////// NO LIGHTING SHADER /////////////////////////////////////////////////////////////////////////////////////////////
@@ -264,8 +263,6 @@ else
 
 )";
 
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////// Refererence Shaders ///////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -307,10 +304,6 @@ const char* simpleFragmentShaderSource = R"(
     }
 )";
 
-
-
-
-
 const char* OffScreenVertexShaderSource = R"(
     #version 330 core
 
@@ -323,7 +316,6 @@ const char* OffScreenVertexShaderSource = R"(
     uniform mat4 modelMatrix;
     uniform mat4 viewMatrix;
     uniform mat4 projectionMatrix;
-
 
     void main()
     {    
@@ -351,8 +343,8 @@ const char* OffScreenFragmentShaderSource = R"(
     }
 )";
 
+} // ShaderSources
+} // Renderer_API
 
-}
-}
 }
 #endif

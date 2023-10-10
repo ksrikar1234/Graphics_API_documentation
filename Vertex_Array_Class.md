@@ -98,7 +98,7 @@ bool setNormal(float n1, float n2, float n3);
 bool updatePosition(float x, float y, float z); 
 bool updateColor(float r, float g, float b); 
 bool updateNormal(float n1, float n2, float n3);
-};
+}; // Struct Vertex
 
 Vertex curr_vertex;
 std::vector<float> vertex_array;

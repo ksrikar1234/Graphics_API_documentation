@@ -33,9 +33,9 @@ float* getPosition() { return this->position;}
 float* getColor()    { return this->color;   }
 float* getNormal()   { return this->normal;  }
 
-
-bool update();
 bool setLayout(AttribLayout input_layout);
+
+bool updateAliases();
 
 bool setPosition(float x, float y, float z); 
 bool setColor(float r, float g, float b); 
@@ -45,6 +45,7 @@ bool updatePosition(float x, float y, float z);
 bool updateColor(float r, float g, float b); 
 bool updateNormal(float n1, float n2, float n3);
 
+bool updateArray();
 };
 
 Vertex curr_vertex;
@@ -55,8 +56,7 @@ std::vector<float>* UpdateVertexArray(std::vector<float>* position, std::vector<
 
 bool push_back(Vertex vertex);
 
-
-Vertex operator[](uint32_t index)
+Vertex& operator[](uint32_t index)
 {
  uint32_t n = (this->layout > 1) ? (this->layout > 3 ? 3 : 2) : 1;
  uint32_t stride_len = n*3;
@@ -77,7 +77,7 @@ Vertex operator[](uint32_t index)
    vertex.normal[i]   = this->vertex_array[index*stride_len + 6 + i]; // normal offset = 6
  }
  
- vertex.update();
+  vertex.updateAliases();
  return vertex;
 }
 

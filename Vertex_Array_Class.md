@@ -1,18 +1,27 @@
 ## Usage
+- Declare `Renderer_API::VertexArray`
 ```cpp
-
 Renderer_API::VertexArray TopoSurfaceVertexArray;
 TopoSurfaceVertexArray.setLayout(Renderer_API::VertexArray::AttribLayout::VCN);
-
+```
+- Create or Set Vertex Data
+```cpp
 std::vector<float> pos , norm , color;
 pos.push_back(1); pos.push_back(2); pos.push_back(3);
 norm.push_back(3); norm.push_back(4); norm.push_back(5);
 color.push_back(5); color.push_back(5); color.push_back(5);
-
+```
+- Build the VertexArray
+```cpp
 TopoSurfaceVertexArray.BuildVertexArray(&pos, &color, &norm); // its ok to destroy pos, norm, color vectors
+```
+- Get Attribute Data by indexing
+```cpp
 float* x = TopoSurfaceVertexArray[0].getColor();
+```
+- Update the VertexArray efficiently
+```cpp
 TopoSurfaceVertexArray[1].setColor(2,2,2);
-
 ```
 
 ## Class Protoype

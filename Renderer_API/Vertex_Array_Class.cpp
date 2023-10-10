@@ -52,5 +52,5 @@ std::vector<float>* VertexArray::BuildVertexArray(std::vector<float>* position =
 
        }     
 }
-
 #endif
+

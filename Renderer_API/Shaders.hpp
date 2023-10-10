@@ -347,4 +347,4 @@ const char* OffScreenFragmentShaderSource = R"(
 } // Renderer_API
 
 }
-#endif
+#endif //  _RENDERER_IN_BUILT_SHADER_SOURCES_

@@ -11,7 +11,7 @@ public :
 
 enum AttribLayout { NONE, V, VC, VN, VCN };
 AttribLayout layout;
-bool setLayout(AttribLayout input_layout)  {  this->layout = input_layout ; return (input_layout > 0 ? true : false); }
+bool setLayout(AttribLayout input_layout)  {  this->layout = input_layout; this->vertex_array.resize(0) ; return (input_layout > 0 ? true : false); }
 
 struct Vertex {
 

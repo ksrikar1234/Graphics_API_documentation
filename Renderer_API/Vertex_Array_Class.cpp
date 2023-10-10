@@ -134,9 +134,9 @@ bool VertexArray::Vertex::updatePosition(float x, float y, float z)
 
  const uint32_t n = (this->layout > 1) ? (this->layout > 3 ? 3 : 2) : 1;
  const uint32_t stride_len = n*3;
-
+ const uint32_t offset = 0 ;
+   
  for(std::size_t i = 0 ; i < 3 ; ++i) {
-   const uint32_t offset = 0 ;
    (*(this->vertex_array_head))[index*stride_len + i + offset] = this->position[i];
  }
  return true;
@@ -150,9 +150,9 @@ bool VertexArray::Vertex::updateColor(float r, float g, float b)
 
  const uint32_t n = (this->layout > 1) ? (this->layout > 3 ? 3 : 2) : 1;
  const uint32_t stride_len = n*3;
- 
+ const uint32_t offset = 3 ;
+   
  for(std::size_t i = 0 ; i < 3 ; ++i) {
-   const uint32_t offset = 3 ;
    (*(this->vertex_array_head))[index*stride_len + offset + i] = this->color[i];
  }
  return true;
@@ -166,9 +166,9 @@ bool VertexArray::Vertex::updateNormal(float n1, float n2, float n3)
  
  const uint32_t n = (this->layout > 1) ? (this->layout > 3 ? 3 : 2) : 1;
  const uint32_t stride_len = n*3;
- 
+ const uint32_t offset = (layout == 3) ? 3 : 6 ;
+   
  for(std::size_t i = 0 ; i < 3 ; ++i) {
-   const uint32_t offset = (layout == 3) ? 3 : 6 ;
    (*(this->vertex_array_head))[index*stride_len + offset + i] = this->normal[i];
  }
  return true;

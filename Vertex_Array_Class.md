@@ -19,19 +19,19 @@ float* x = TopoSurfaceVertexArray[0].getColor();
 float* y = TopoSurfaceVertexArray[0].getPosition();
 float* x = TopoSurfaceVertexArray[0].getNormal();
 ```
-- Get Position Data by x,y,z notation
+- Get Position Data by x, y, z notation
 ```cpp
 TopoSurfaceVertexArray[0].x
 TopoSurfaceVertexArray[0].y
 TopoSurfaceVertexArray[0].z
 ```
-- Get Color Data by r,g,b notation
+- Get Color Data by r, g, b notation
 ```cpp
 TopoSurfaceVertexArray[0].r
 TopoSurfaceVertexArray[0].g
 TopoSurfaceVertexArray[0].b
 ```
-- Get Normal Data by n1,n2,n3 notation
+- Get Normal Data by n1, n2, n3 notation
 ```cpp
 TopoSurfaceVertexArray[0].n1
 TopoSurfaceVertexArray[0].n2

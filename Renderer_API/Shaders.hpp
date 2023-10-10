@@ -201,8 +201,6 @@ void main()
 }
 )";
 
-
-
 //------------------------------------------On Screen rendering Fragment Shader----------------------------------------------------------------+
 
 const char* vcn_fragment_shader = R"(

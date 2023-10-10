@@ -142,11 +142,20 @@ bool VertexArray::Vertex::setLayout(AttribLayout input_layout) {
 }
 
 
-bool VertexArray::Vertex::update()
+bool VertexArray::Vertex::updateAliases()
 {
    x  = this->position[0] ; y = this->position[1] ; z = this->position[2];
    r  = this->color[0]    ; g = this->color[1]    ; b = this->color[2] ;
    n1 = this->normal[0]   ; n2 = this->normal[1]  ; n3 = this->normal[2];
+   return true;
+}
+
+bool VertexArray::Vertex::updateArray()
+{
+   updateAliases();
+   updatePosition(this->x,this->y,this->z);
+   updateColor(this->r, this->g, this->b);
+   updateNormal(this->n1, this->n2, this->n3); 
    return true;
 }
 

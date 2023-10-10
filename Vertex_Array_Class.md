@@ -3,7 +3,7 @@
 ```cpp
 Renderer_API::VertexArray TopoSurfaceVertexArray;
 ```
-- Set Layout of VertexArray. { NONE, V, VC, VN & VCN } are availiable options
+- Set Layout of VertexArray. ` NONE, V, VC, VN & VCN ` are availiable options
 ```cpp
 TopoSurfaceVertexArray.setLayout(Renderer_API::VertexArray::AttribLayout::VCN);
 ```

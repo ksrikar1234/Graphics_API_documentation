@@ -2,16 +2,16 @@
 #define _VERTEX_ARRAY_CLASS_HPP_
 #include <cstdint>
 #include <vector>
-#include <iostream>
 
 namespace Renderer_API {
 class VertexArray {
 public :
-enum AttribLayout { NONE, V, VC, VN, VCN };
-AttribLayout layout;
-
  VertexArray() : layout(AttribLayout::NONE) {}
 ~VertexArray() {}
+
+enum AttribLayout { NONE, V, VC, VN, VCN };
+AttribLayout layout;
+bool setLayout(AttribLayout input_layout)  {  this->layout = input_layout ; return (input_layout > 0 ? true : false); }
 
 struct Vertex {
 
@@ -50,8 +50,6 @@ bool updateNormal(float n1, float n2, float n3);
 Vertex curr_vertex;
 
 std::vector<float> vertex_array;
-bool setLayout(AttribLayout input_layout)  {  this->layout = input_layout ; return (input_layout > 0 ? true : false); }
-
 std::vector<float>* BuildVertexArray(std::vector<float>* position, std::vector<float>* color, std::vector<float>* normal);
 std::vector<float>* UpdateVertexArray(std::vector<float>* position, std::vector<float>* color, std::vector<float>* normal);
 

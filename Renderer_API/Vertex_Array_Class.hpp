@@ -1,5 +1,6 @@
 #ifndef _VERTEX_ARRAY_CLASS_HPP_
 #define _VERTEX_ARRAY_CLASS_HPP_
+#include <vector>
 namespace Renderer_API {
 
 class VertexArray {

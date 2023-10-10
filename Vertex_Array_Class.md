@@ -47,7 +47,7 @@ dummy_vertex.setNormal(0,0,0);
 TopoSurfaceVertexArray.push_back(dummy_vertex);
 
 ```
-- Update using update"Attrib"() (Use this for small updates)
+- Update using updateAttrib() (Use this for small updates)
 ```cpp
 TopoSurfaceVertexArray[0].updateColor(2,2,2);
 ```

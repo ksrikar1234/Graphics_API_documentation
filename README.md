@@ -67,7 +67,7 @@ Existing RenderPipeline Structure & Configuration exists as
 
 ### Temporary Solution : 
 - Create a wrapper Model class to encapsulate all `OpenGL 2.1` , `OpenGL 3.3` calls into a custom Renderer API & replace them. (Not an Elegant solution as i thought initially but works) 
-### Usage
+### Interface Usage
 - Create a Model Object ("Renderable Model in OpenGL context" not to be confused with actual data structure)
   
   ```cpp
@@ -109,7 +109,7 @@ Existing RenderPipeline Structure & Configuration exists as
 - `Setting model Visibility flags.`
     
 ## Renderer API Usage 
-- This example is one avaliable interface for OpenGL_2_1_API. A new Interface will be Based on [Usage](#usage)
+- This example is one avaliable interface for OpenGL_2_1_API. A new Interface will be Based on [Interface Usage](#interface-usage)
   For using this interface include this header in your src file
 ```cpp 
   #ifdef GP_USE_RENDERER_API

@@ -67,3 +67,7 @@ void render();
 
 } // namespace Renderer_API
 #endif // _MODEL_CLASS_HPP_
+
+#ifdef USE_HEADER_ONY_IMPLEMENTATION
+#include "Model_Class.cpp"
+#endif

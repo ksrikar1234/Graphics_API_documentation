@@ -109,6 +109,81 @@ Existing RenderPipeline Structure & Configuration exists as
 - `Setting model Visibility flags.`
     
 ## Renderer API Usage 
+- This example is one avaliable interface for OpenGL_2_1_API. A new Interface will be Based on [Usage](#usage)
+  For using this interface
+  ```cpp 
+  #ifdef GP_USE_RENDERER_API
+  #include "../Model_Renderer_API/Model_Renderer_API_Core/renderer_api.hpp"
+  #endif 
+```
+```cpp
+  void Gp_gui_topology::draw_corners_render() const
+  {
+      if(! get_num_corners_in_corner_group(current_corner_group) && ! get_num_corners_in_corner_group(ref_corner_group))
+	  return;
+#ifdef GP_USE_RENDERER_API
+     {
+     using namespace OpenGL_2_1_API;
+     Renderer::Model Corner_group(1);
+     Corner_group.setPrimitiveType(Renderer::PrimitiveType::POINTS);
+      if(! topology_corners_ref_group_indices_array.empty())
+      {
+		Corner_group.setMonoColor(ref_corner_color);
+	    Corner_group.setVertexArray(topology_corner_positions_array);
+	    Corner_group.setIndexArray(topology_corners_ref_group_indices_array);
+        Corner_group.render();
+      }
+
+	if(! topology_corners_cur_group_indices_array.empty())
+      {
+		Corner_group.setMonoColor(corner_color);
+	    Corner_group.setVertexArray(topology_corner_positions_array);
+	    Corner_group.setIndexArray(topology_corners_cur_group_indices_array);
+        Corner_group.render();
+      }
+	 }
+#endif	 
+
+#ifndef GP_USE_RENDERER_API
+      GL_ERROR_CHECK;
+
+      bool lighting_is_enabled = glIsEnabled(GL_LIGHTING);
+      if(lighting_is_enabled)
+	  glDisable(GL_LIGHTING);
+
+      glColor3ubv(&ref_corner_color.r);
+      if(! topology_corners_ref_group_indices_array.empty())
+      {
+	  glEnableClientState(GL_VERTEX_ARRAY);
+	  glVertexPointer(3, GL_FLOAT, 3*sizeof(GLfloat), &(topology_corner_positions_array[0]));
+	  glDrawElements(GL_POINTS, topology_corners_ref_group_indices_array.size(), 
+			 GL_UNSIGNED_INT, &(topology_corners_ref_group_indices_array[0]));
+	  glDisableClientState(GL_VERTEX_ARRAY);
+	  GL_ERROR_CHECK;
+      }
+
+      if(is_in_motion)
+	  glDepthFunc(GL_ALWAYS);
+      glColor3ubv(&corner_color.r);
+      if(! topology_corners_cur_group_indices_array.empty())
+      {
+	  glEnableClientState(GL_VERTEX_ARRAY);
+	  glVertexPointer(3, GL_FLOAT, 3*sizeof(GLfloat), &(topology_corner_positions_array[0]));
+	  glDrawElements(GL_POINTS, topology_corners_cur_group_indices_array.size(), 
+			 GL_UNSIGNED_INT, &(topology_corners_cur_group_indices_array[0]));
+	  glDisableClientState(GL_VERTEX_ARRAY);
+	  GL_ERROR_CHECK;
+      }
+	        if(lighting_is_enabled)
+	  glEnable(GL_LIGHTING);
+#endif	 
+
+      if(is_in_motion)
+	  glDepthFunc(GL_LEQUAL);
+  }
+
+```
+
 - Create a gp_gui_class by inheriting the topology (already implemented) & instead of maintaining a lot of variables , containers to store vertices, indices, color_data ,    
    surface_ids , etc 
 - Use [RenderableEntity](RenderableEntity_Class.md) class to group together all required data. 

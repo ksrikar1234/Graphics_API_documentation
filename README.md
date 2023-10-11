@@ -130,20 +130,20 @@ Existing RenderPipeline Structure & Configuration exists as
      Corner_group.setPrimitiveType(Renderer::PrimitiveType::POINTS);
       if(! topology_corners_ref_group_indices_array.empty())
       {
-		Corner_group.setMonoColor(ref_corner_color);
-	    Corner_group.setVertexArray(topology_corner_positions_array);
-	    Corner_group.setIndexArray(topology_corners_ref_group_indices_array);
-        Corner_group.render();
+         Corner_group.setMonoColor(ref_corner_color);
+         Corner_group.setVertexArray(topology_corner_positions_array);
+         Corner_group.setIndexArray(topology_corners_ref_group_indices_array);
+         Corner_group.render();
       }
 
-	if(! topology_corners_cur_group_indices_array.empty())
+      if(! topology_corners_cur_group_indices_array.empty())
       {
-		Corner_group.setMonoColor(corner_color);
-	    Corner_group.setVertexArray(topology_corner_positions_array);
-	    Corner_group.setIndexArray(topology_corners_cur_group_indices_array);
-        Corner_group.render();
+          Corner_group.setMonoColor(corner_color);
+          Corner_group.setVertexArray(topology_corner_positions_array);
+          Corner_group.setIndexArray(topology_corners_cur_group_indices_array);
+          Corner_group.render();
       }
-	 } 
+      } 
     #endif	 
 
     #ifndef GP_USE_RENDERER_API

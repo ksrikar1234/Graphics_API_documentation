@@ -110,18 +110,20 @@ Existing RenderPipeline Structure & Configuration exists as
     
 ## Renderer API Usage 
 - This example is one avaliable interface for OpenGL_2_1_API. A new Interface will be Based on [Usage](#usage)
-  For using this interface
-  ```cpp 
+  For using this interface include this header in your src file
+```cpp 
   #ifdef GP_USE_RENDERER_API
   #include "../Model_Renderer_API/Model_Renderer_API_Core/renderer_api.hpp"
   #endif 
 ```
+- Example Porting to new interface 
+
 ```cpp
   void Gp_gui_topology::draw_corners_render() const
   {
       if(! get_num_corners_in_corner_group(current_corner_group) && ! get_num_corners_in_corner_group(ref_corner_group))
 	  return;
-#ifdef GP_USE_RENDERER_API
+     #ifdef GP_USE_RENDERER_API
      {
      using namespace OpenGL_2_1_API;
      Renderer::Model Corner_group(1);
@@ -141,10 +143,10 @@ Existing RenderPipeline Structure & Configuration exists as
 	    Corner_group.setIndexArray(topology_corners_cur_group_indices_array);
         Corner_group.render();
       }
-	 }
-#endif	 
+	 } 
+    #endif	 
 
-#ifndef GP_USE_RENDERER_API
+    #ifndef GP_USE_RENDERER_API
       GL_ERROR_CHECK;
 
       bool lighting_is_enabled = glIsEnabled(GL_LIGHTING);

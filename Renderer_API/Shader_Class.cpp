@@ -6,13 +6,13 @@ namespace Renderer_API {
 
 OpenGLShader::OpenGLShader(std::string ShaderProgramID)
 {
-    this->ShaderID = ShaderProgramID;
+  this->ShaderID = ShaderProgramID;
 }
 
 OpenGLShader::OpenGLShader(std::string ShaderProgramID , const char* VertexShaderSource, const char* FragmentShaderSource )
 {  
    initializeOpenGLFunctions();
- if(FragmentShaderSource != "" || VertexShaderSource != "" ) 
+   if(FragmentShaderSource != "" || VertexShaderSource != "" ) 
    {
     this->ShaderID = ShaderProgramID; // Set Name of the Shader ID Not compulsory but just makes your life easy during debugging
     compileFragmentShader(FragmentShaderSource);
@@ -26,8 +26,7 @@ OpenGLShader::OpenGLShader(std::string ShaderProgramID , const char* VertexShade
   
 GLuint OpenGLShader::ConstructShader(std::string ShaderProgramID = "", const char* VertexShaderSource = "", const char* FragmentShaderSource = "")
 {
-
-if(FragmentShaderSource != "" || VertexShaderSource != "" )
+  if(FragmentShaderSource != "" || VertexShaderSource != "" )
    {
     this->ShaderID = ShaderProgramID; // Set Name of the Shader ID Not compulsory but just makes your life easy during debugging
     compileFragmentShader(FragmentShaderSource);
@@ -36,8 +35,7 @@ if(FragmentShaderSource != "" || VertexShaderSource != "" )
     return (this->ShaderProgram);
    }
   
-  else printf("ERROR: INVALID SHADER SOURCES");
-        
+  else printf("ERROR: INVALID SHADER SOURCES");      
   if(ShaderProgramID == "") printf("Mild Warning: No Internal ID was given to Shader Program. Please given an Unique ID for Debugging \n");
 }
 
@@ -79,8 +77,8 @@ GLuint OpenGLShader::linkShaderProgram(GLuint ShaderProgramHandle ,GLuint Vertex
    glAttachShader(this->ShaderProgram ,  this->VertexShaderProgram);
    glAttachShader(this->ShaderProgram ,  this->FragmentShaderProgram);
    glLinkProgram(this->ShaderProgram );
-   glDeleteShader(VertexShaderProgramHandle);
-   glDeleteShader(FragmentShaderProgramHandle); 
+   //glDeleteShader(VertexShaderProgramHandle);
+   //glDeleteShader(FragmentShaderProgramHandle); 
 
    glGetProgramiv(this->ShaderProgram , GL_LINK_STATUS, &success);
    if (!success)

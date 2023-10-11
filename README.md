@@ -68,23 +68,28 @@ Existing RenderPipeline Structure & Configuration exists as
 ### Temporary Solution : 
 - Create a wrapper Model class to encapsulate all `OpenGL 2.1` , `OpenGL 3.3` calls into a custom Renderer API & replace them. (Not an Elegant solution as i thought initially but works) 
 ### Usage :
--  Create a Model Object
+- Create a Model Object
+
   ```cpp
   class Renderer_API::Model LinearSurfaceSegment;
   ```
+
 - Set Layout of the vertex Array (*very important)  
   ```cpp
   LinearSurfaceSegment.setVertexAttribLayout(Renderer_API::VertexArray::Layout::VN);
   ```
+
 - Pass the Data  
   ```cpp
   LinearSurfaceSegment.setVertexAttribData(&pos, nullptr, &normal);
   ```
+
 - Set Shading type, Lighting, material etc  
   ```cpp
   LinearSurfaceSegment.setShadeModel(Renderer_API::ShadeModel::FLAT);
   LinearSurfaceSegment.setLighting(false);
   ```
+
 - Render in the Scene
   ```cpp
   Scene.render(LinearSurfaceSegment);

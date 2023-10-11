@@ -144,7 +144,88 @@ Existing RenderPipeline Structure & Configuration exists as
           Corner_group.render();
       }
       } 
-    #endif	 
+    #endif
+	 
+#ifdef GP_USE_RENDERER_OPENGL_3_3 // Pure OpenGL 3.3  
+OpenGL_3_3_API::Renderer::Shader::OpenGLShader ModelShader("Corner Shader" , OpenGL_3_3_API::Renderer::ShaderSources::simpleVertexShaderSource,
+                                                                             OpenGL_3_3_API::Renderer::ShaderSources::simpleFragmentShaderSource);
+GLuint VAO;
+glGenVertexArrays(1, &VAO);
+glBindVertexArray(VAO); 
+
+std::unordered_map<std::string, GLuint> VertexBufferObjects;
+std::unordered_map<std::string, GLuint> IndexBufferObjects;
+std::unordered_map<std::string, GLuint> VertexAttributeLocations;
+std::unordered_map<std::string, GLuint> uniformLocations;
+
+//----------------Pass Position Data ------------------------------------------------+
+
+glUseProgram(ModelShader.ShaderProgram);
+glGenBuffers(1,&VertexBufferObjects["position"]);
+glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObjects["position"]);
+glBufferData(GL_ARRAY_BUFFER, topology_corner_positions_array.size(), &topology_corner_positions_array[0] , GL_STATIC_DRAW);
+
+// Get the Vertex Attribute location in GLSL shader code
+VertexAttributeLocations["position"]  = glGetAttribLocation(ModelShader.ShaderProgram, "position");
+
+if(VertexAttributeLocations["position"] != -1) 
+{
+ printf("Found Vertex Attribute : position");
+ glEnableVertexAttribArray(VertexAttributeLocations["position"]);
+
+ glVertexAttribPointer(VertexAttributeLocations["position"], 3, GL_FLOAT, GL_FALSE,  3 * sizeof(GLfloat) , 0);
+}
+else std::cerr << "No VertexAttributeLocation in shader with Name " << "position" << "\n";
+glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+//----------------Pass index Data ------------------------------------------------+
+// Create and a Index Buffer Object (VBO) for vertex attribute name "IndexBufferName" 
+
+std::string IndexBufferName = "index_data";
+  
+glGenBuffers(1, &IndexBufferObjects[IndexBufferName]);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBufferObjects[IndexBufferName]);
+glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->topology_corners_ref_group_indices_array.size(), &this->topology_corners_ref_group_indices_array[0], GL_STATIC_DRAW);
+//glBufferSubData(GL_ELEMENT_ARRAY_BUFFER , offset , &empty_array[0] );
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+// ------------Pass Uniform Data -------------------------------------------------+
+
+std::cout << " Projection matrix = " <<this->glm_projection_matrix[0][0] << "\n";
+
+uniformLocations["projectionMatrix"] = glGetUniformLocation(ModelShader.ShaderProgram, "projectionMatrix");
+uniformLocations["viewMatrix"]       = glGetUniformLocation(ModelShader.ShaderProgram, "viewMatrix");
+uniformLocations["modelMatrix"]      = glGetUniformLocation(ModelShader.ShaderProgram, "modelMatrix");
+   
+glUniformMatrix4fv(uniformLocations["projectionMatrix"], 1, GL_FALSE, glm::value_ptr(this->glm_projection_matrix));
+glUniformMatrix4fv(uniformLocations["viewMatrix"], 1, GL_FALSE, glm::value_ptr(this->glm_view_matrix));
+glUniformMatrix4fv(uniformLocations["modelMatrix"], 1, GL_FALSE, glm::value_ptr(this->glm_model_matrix));
+
+uniformLocations["changing_color"] = glGetUniformLocation(ModelShader.ShaderProgram, "changing_color"); 
+glUniform3f(uniformLocations["changing_color"], 1.0f, 1.0f, 1.0f); 
+
+glPointSize(10.0f);
+
+glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObjects["position"]);
+glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBufferObjects[IndexBufferName]);
+glEnable(GL_DEPTH_TEST);
+//glDrawArrays(GL_POINTS , 0, topology_corner_positions_array.size());
+//glDepthFunc(GL_ALWAYS);
+glDrawElements(GL_POINTS, topology_corners_cur_group_indices_array.size(), GL_UNSIGNED_INT, nullptr); // &(topology_corners_cur_group_indices_array[0])
+
+GLuint PrimitiveID =  OpenGL_3_3_API::Renderer::utils::retrieve_selected_primitive_ID(this->mouse_x ,this->mouse_y ) - 1;
+std::string selected_id = "Selected Corner = " + std::to_string(PrimitiveID);
+messg_statusbar(selected_id.c_str());
+glDeleteBuffers(1, &VertexBufferObjects["position"]);
+glDeleteBuffers(1, &IndexBufferObjects[IndexBufferName]);
+glDeleteVertexArrays(1, &VAO);
+glUseProgram(0);
+
+
+
+
+
+
 
     #ifndef GP_USE_RENDERER_API
       GL_ERROR_CHECK;
@@ -183,7 +264,6 @@ Existing RenderPipeline Structure & Configuration exists as
       if(is_in_motion)
 	  glDepthFunc(GL_LEQUAL);
   }
-
 ```
 
 - Create a gp_gui_class by inheriting the topology (already implemented) & instead of maintaining a lot of variables , containers to store vertices, indices, color_data ,    

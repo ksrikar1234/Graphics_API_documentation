@@ -81,6 +81,7 @@ Existing RenderPipeline Structure & Configuration exists as
 
 - Pass the Data  
   ```cpp
+  std::vector<float> pos, normal; // set some data 
   LinearSurfaceSegment.setVertexAttribData(&pos, nullptr, &normal);
   ```
 

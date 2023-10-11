@@ -55,7 +55,7 @@ struct Material
    float shininess;
    float ambient[3], diffuse[3] , specular[3];
 };
-Material ModelMaterial;
+Material model_material;
 void setModelMaterial(Material model_material);
 
 void setLighting(bool Lighting_Switch_Flag);

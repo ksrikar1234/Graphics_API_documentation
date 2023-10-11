@@ -64,9 +64,8 @@ void setLighting(bool Lighting_Switch_Flag);
 void render();
 
 private :
-std::unordered_map<std::string, uint>
-
-
+std::unordered_map<std::string, uint> uniformLocations;
+std::unordered_map<std::string, uint> VertexAttributeLocations;
 
 };
 

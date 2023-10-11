@@ -11,6 +11,8 @@ class Model {
 public :
 
 uint64_t UUID;
+uint32_t LayerID;
+std::string name;
 
 uint32_t VBO, VAO;
 
@@ -24,6 +26,15 @@ enum Visibility_Flag             {ENABLE, DISABLE};
 enum Material_Flag               {ENABLE, DISABLE};
 enum Lighting_Flag               {ENABLE, DISABLE};
 
+Visibility_Flag visibility;
+void setVisibilityFlag(Visibility_Flag flag);
+
+PrimitiveType primitive_type;
+float primitive_thickness;
+void setPrimitive(PrimitiveType primitive_type, float primitive_thickness);
+
+PolygonMode polygon_mode;
+void setPolygonMode(PolgonMode polygon_mode);
 
 VertexArray vertex_array;
 VertexArray::AttribLayout layout;
@@ -43,10 +54,11 @@ struct Material
    float shininess;
    float ambient[3], diffuse[3] , specular[3];
 };
-
 Material ModelMaterial;
-void setMaterial(Material material);
+void setModelMaterial(Material model_material);
+
 void setLighting(bool Lighting_Switch_Flag);
+
 void render();
 
 };

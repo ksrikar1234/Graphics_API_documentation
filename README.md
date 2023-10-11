@@ -267,7 +267,7 @@ glDeleteVertexArrays(1, &VAO);
 glUseProgram(0);
 
 ```
-
+## Permanent Solution
 
 - Create a gp_gui_class by inheriting the topology (already implemented) & instead of maintaining a lot of variables , containers to store vertices, indices, color_data ,    
    surface_ids , etc 

@@ -67,7 +67,7 @@ Existing RenderPipeline Structure & Configuration exists as
 
 ### Temporary Solution : 
 - Create a wrapper Model class to encapsulate all `OpenGL 2.1` , `OpenGL 3.3` calls into a custom Renderer API & replace them. (Not an Elegant solution as i thought initially but works) 
-### Usage :
+### Usage
 - Create a Model Object ("Renderable Model in OpenGL context" not to be confused with actual data structure)
   
   ```cpp

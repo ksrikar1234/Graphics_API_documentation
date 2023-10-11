@@ -42,7 +42,7 @@ VertexArray::AttribLayout layout;
 void setVertexAttribLayout(VertexArray::AttribLayout layout);
 void setVertexAttribData(std::vector<float>* positon, std::vector<float>* color, std::vector<float>* normal);
 void updateVertexAttribData(std::vector<float>* positon, std::vector<float>* color, std::vector<float>* normal);
-void setIndexData();
+void setIndexData(std::vector<uint32_t>& index_array);
 
 Shader ModelShader;
 ShadeModel shade_model;

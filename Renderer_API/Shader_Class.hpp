@@ -1,7 +1,8 @@
 #ifndef _RENDERER_OPENGL_SHADER_CLASS_
 #define _RENDERER_OPENGL_SHADER_CLASS_
 
-#ifdef USE_QT_OPENGL_LOADER
+#define USE_QT_OPENGL_LOADER
+#ifdef  USE_QT_OPENGL_LOADER
 #include <QOpenGLFunctions_3_3_Compatibility>
 #else
 #include <GL/glew.h>
@@ -31,5 +32,5 @@ class OpenGLShader : protected QOpenGLFunctions_3_3_Compatibility {
 #endif
 
 #ifdef USE_HEADER_ONLY_IMPLEMENTATION
-#include "Shader.cpp"
+#include "Shader_Class.cpp"
 #endif

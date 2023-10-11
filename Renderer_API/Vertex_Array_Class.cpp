@@ -33,14 +33,16 @@ std::vector<float>* VertexArray::BuildVertexArray(std::vector<float>* position =
          this->vertex_array.push_back((*position)[vertex_id+0]);
          this->vertex_array.push_back((*position)[vertex_id+1]);
          this->vertex_array.push_back((*position)[vertex_id+2]);
-
+         
+         if(this->layout == 2 || this->layout == 4)
          if(color != nullptr)
            {
              this->vertex_array.push_back((*color)[vertex_id+0]);
              this->vertex_array.push_back((*color)[vertex_id+1]);
              this->vertex_array.push_back((*color)[vertex_id+2]);
            }
-
+         
+         if(this->layout == 3 || this->layout == 4)
          if(normal != nullptr)
            {
              this->vertex_array.push_back((*normal)[vertex_id+0]);

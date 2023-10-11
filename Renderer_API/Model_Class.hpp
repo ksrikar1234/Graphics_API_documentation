@@ -27,8 +27,8 @@ enum Visibility_Flag             {ENABLE, DISABLE};
 enum Material_Flag               {ENABLE, DISABLE};
 enum Lighting_Flag               {ENABLE, DISABLE};
 
-Visibility_Flag visibility;
-void setVisibilityFlag(Visibility_Flag flag);
+Visibility_Flag model_visibility;
+void setVisibilityFlag(Visibility_Flag visibility_flag);
 
 PrimitiveType primitive_type;
 float primitive_thickness;

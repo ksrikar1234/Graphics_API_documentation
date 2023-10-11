@@ -72,7 +72,6 @@ Existing RenderPipeline Structure & Configuration exists as
   ```cpp
   class Renderer_API::Model LinearSurfaceSegment;
   ```
--  
 - Set Layout of the vertex Array (*very important)  
   ```cpp
   LinearSurfaceSegment.setVertexAttribLayout(Renderer_API::VertexArray::Layout::VN);

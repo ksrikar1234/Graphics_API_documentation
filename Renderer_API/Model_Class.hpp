@@ -1,8 +1,8 @@
 #ifndef _MODEL_CLASS_HPP_
 #define _MODEL_CLASS_HPP_
 
-#include "Vertex_Array_Class.hpp"
 #define USE_HEADER_ONLY_IMPLEMENTATION
+#include "Vertex_Array_Class.hpp"
 #include "Shader_Class.hpp"
 #undef USE_HEADER_ONLY_IMPLEMENTATION
 

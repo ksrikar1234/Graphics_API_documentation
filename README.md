@@ -90,7 +90,10 @@ Existing RenderPipeline Structure & Configuration exists as
   LinearSurfaceSegment.setShadeModel(Renderer_API::ShadeModel::FLAT);
   LinearSurfaceSegment.setLighting(false);
   ```
-
+- Set Primitive Type
+  ```cpp
+  LinearSurfaceSegment.setPrimitiveType(Renderer_API::Model::PrimitiveType::TRIANGLE);
+  ```
 - Render in the Scene
   ```cpp
   Scene.render(LinearSurfaceSegment);

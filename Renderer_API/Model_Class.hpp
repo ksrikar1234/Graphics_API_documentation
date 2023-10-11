@@ -58,6 +58,7 @@ struct Material
 Material model_material;
 void setModelMaterial(Material model_material);
 
+Lighting_Flag lighting_flag;
 void setLighting(bool Lighting_Switch_Flag);
 
 void render();

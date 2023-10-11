@@ -46,7 +46,7 @@ void setIndexData(std::vector<uint32_t>& index_array);
 
 Shader ModelShader;
 ShadeModel shade_model;
-void setShadeModel();
+void setShadeModel(ShadeModel);
 
 struct Material
 {

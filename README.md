@@ -66,8 +66,15 @@ Existing RenderPipeline Structure & Configuration exists as
 ## Solutions
 
 ### Temporary Solution : 
-- Create a wrapper class to encapsulate all `OpenGL 2.1` , `OpenGL 3.3` calls into a custom Renderer API & replace them. (Not an Elegant solution as i thought initially) 
-
+- Create a wrapper Model class to encapsulate all `OpenGL 2.1` , `OpenGL 3.3` calls into a custom Renderer API & replace them. (Not an Elegant solution as i thought initially) 
+  ```
+  Renderer_API::Model LinearSurfaceSegment;
+  LinearSurfaceSegment.setVertexAttribLayout(Renderer_API::VertexArray::Layout::VN);
+  LinearSurfaceSegment.setVertexAttribData(&pos, nullptr, &normal);
+  LinearSurfaceSegment.setShadeModel(Renderer_API::ShadeModel::FLAT);
+  LinearSurfaceSegment.setLighting(false);
+  Scene.render(LinearSurfaceSegment);
+  ```
 ### Permanent Solution :
 - Create a Proper `(RenderableEntity -> SceneRenderer)` abstraction system.
 - Seperate the `Model_Data` `<->` `Renderer` properly.

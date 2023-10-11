@@ -63,6 +63,11 @@ void setLighting(bool Lighting_Switch_Flag);
 
 void render();
 
+private :
+std::unordered_map<std::string, uint>
+
+
+
 };
 
 } // namespace Renderer_API

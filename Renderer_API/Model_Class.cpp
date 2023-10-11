@@ -1,6 +1,8 @@
 #ifdef  _MODEL_CLASS_CPP_
 #define _MODEL_CLASS_CPP_
 
+#include "Model_Class.hpp"
+
 namespace Renderer_API {
 
 void Model::setVisibilityFlag(Visibility_Flag flag)

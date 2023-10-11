@@ -145,7 +145,52 @@ Existing RenderPipeline Structure & Configuration exists as
       }
       } 
     #endif
-	 
+```
+- OpenGL 2.1 Equivalent code
+```cpp
+ #ifndef GP_USE_RENDERER_API
+      GL_ERROR_CHECK;
+
+      bool lighting_is_enabled = glIsEnabled(GL_LIGHTING);
+      if(lighting_is_enabled)
+	  glDisable(GL_LIGHTING);
+
+      glColor3ubv(&ref_corner_color.r);
+      if(! topology_corners_ref_group_indices_array.empty())
+      {
+	  glEnableClientState(GL_VERTEX_ARRAY);
+	  glVertexPointer(3, GL_FLOAT, 3*sizeof(GLfloat), &(topology_corner_positions_array[0]));
+	  glDrawElements(GL_POINTS, topology_corners_ref_group_indices_array.size(), 
+			 GL_UNSIGNED_INT, &(topology_corners_ref_group_indices_array[0]));
+	  glDisableClientState(GL_VERTEX_ARRAY);
+	  GL_ERROR_CHECK;
+      }
+
+      if(is_in_motion)
+	  glDepthFunc(GL_ALWAYS);
+      glColor3ubv(&corner_color.r);
+      if(! topology_corners_cur_group_indices_array.empty())
+      {
+	  glEnableClientState(GL_VERTEX_ARRAY);
+	  glVertexPointer(3, GL_FLOAT, 3*sizeof(GLfloat), &(topology_corner_positions_array[0]));
+	  glDrawElements(GL_POINTS, topology_corners_cur_group_indices_array.size(), 
+			 GL_UNSIGNED_INT, &(topology_corners_cur_group_indices_array[0]));
+	  glDisableClientState(GL_VERTEX_ARRAY);
+	  GL_ERROR_CHECK;
+      }
+	        if(lighting_is_enabled)
+	  glEnable(GL_LIGHTING);
+#endif	 
+
+      if(is_in_motion)
+	  glDepthFunc(GL_LEQUAL);
+  }
+```
+
+
+- OpenGL 3.3 Equivalent
+
+```cpp	 
 #ifdef GP_USE_RENDERER_OPENGL_3_3 // Pure OpenGL 3.3  
 OpenGL_3_3_API::Renderer::Shader::OpenGLShader ModelShader("Corner Shader" , OpenGL_3_3_API::Renderer::ShaderSources::simpleVertexShaderSource,
                                                                              OpenGL_3_3_API::Renderer::ShaderSources::simpleFragmentShaderSource);
@@ -221,50 +266,8 @@ glDeleteBuffers(1, &IndexBufferObjects[IndexBufferName]);
 glDeleteVertexArrays(1, &VAO);
 glUseProgram(0);
 
-
-
-
-
-
-
-    #ifndef GP_USE_RENDERER_API
-      GL_ERROR_CHECK;
-
-      bool lighting_is_enabled = glIsEnabled(GL_LIGHTING);
-      if(lighting_is_enabled)
-	  glDisable(GL_LIGHTING);
-
-      glColor3ubv(&ref_corner_color.r);
-      if(! topology_corners_ref_group_indices_array.empty())
-      {
-	  glEnableClientState(GL_VERTEX_ARRAY);
-	  glVertexPointer(3, GL_FLOAT, 3*sizeof(GLfloat), &(topology_corner_positions_array[0]));
-	  glDrawElements(GL_POINTS, topology_corners_ref_group_indices_array.size(), 
-			 GL_UNSIGNED_INT, &(topology_corners_ref_group_indices_array[0]));
-	  glDisableClientState(GL_VERTEX_ARRAY);
-	  GL_ERROR_CHECK;
-      }
-
-      if(is_in_motion)
-	  glDepthFunc(GL_ALWAYS);
-      glColor3ubv(&corner_color.r);
-      if(! topology_corners_cur_group_indices_array.empty())
-      {
-	  glEnableClientState(GL_VERTEX_ARRAY);
-	  glVertexPointer(3, GL_FLOAT, 3*sizeof(GLfloat), &(topology_corner_positions_array[0]));
-	  glDrawElements(GL_POINTS, topology_corners_cur_group_indices_array.size(), 
-			 GL_UNSIGNED_INT, &(topology_corners_cur_group_indices_array[0]));
-	  glDisableClientState(GL_VERTEX_ARRAY);
-	  GL_ERROR_CHECK;
-      }
-	        if(lighting_is_enabled)
-	  glEnable(GL_LIGHTING);
-#endif	 
-
-      if(is_in_motion)
-	  glDepthFunc(GL_LEQUAL);
-  }
 ```
+
 
 - Create a gp_gui_class by inheriting the topology (already implemented) & instead of maintaining a lot of variables , containers to store vertices, indices, color_data ,    
    surface_ids , etc 

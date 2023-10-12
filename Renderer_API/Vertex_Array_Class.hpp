@@ -29,12 +29,12 @@ float x, y, z;
 float r, g, b;
 float n1, n2, n3;
 
- Vertex() : layout(0) {}
+ Vertex() : layout(AttribLayout::NONE) {}
 ~Vertex() {}
 
-float* getPosition() { (layout != 0) ? return this->position : return nullptr ;}
-float* getColor()    { if(layout == 2 || layout == 4) return this->color  : return nullptr; }
-float* getNormal()   { if(layout == 3 || layout == 4) return this->normal : return nullptr; }
+float* getPosition() { return ((layout != 0) ?  this->position :  nullptr );}
+float* getColor()    { return ((layout == 2 || layout == 4) ?  this->color  : nullptr); }
+float* getNormal()   { return ((layout == 3 || layout == 4) ?  this->normal :  nullptr); }
 
 bool setLayout(AttribLayout input_layout);
 

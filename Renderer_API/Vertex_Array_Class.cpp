@@ -99,7 +99,7 @@ std::vector<float>* VertexArray::UpdateVertexArray(std::vector<float>* position 
              }
            }
            
-         if(layout == 4)  
+         if(layout == 3)  
          if(normal != nullptr)
             {
              this->vertex_array[vertex_id + 3] = (*normal)[vertex_id+0];

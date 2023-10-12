@@ -30,24 +30,24 @@ std::vector<float>* VertexArray::BuildVertexArray(std::vector<float>* position =
 
     for(std::size_t vertex_id = 0; vertex_id < (position->size())/3; ++vertex_id )
        {
-         this->vertex_array.push_back((*position)[vertex_id+0]);
-         this->vertex_array.push_back((*position)[vertex_id+1]);
-         this->vertex_array.push_back((*position)[vertex_id+2]);
+         this->vertex_array.push_back((*position)[vertex_id*3+0]);
+         this->vertex_array.push_back((*position)[vertex_id*3+1]);
+         this->vertex_array.push_back((*position)[vertex_id*3+2]);
          
          if(this->layout == 2 || this->layout == 4)
          if(color != nullptr)
            {
-             this->vertex_array.push_back((*color)[vertex_id+0]);
-             this->vertex_array.push_back((*color)[vertex_id+1]);
-             this->vertex_array.push_back((*color)[vertex_id+2]);
+             this->vertex_array.push_back((*color)[vertex_id*3+0]);
+             this->vertex_array.push_back((*color)[vertex_id*3+1]);
+             this->vertex_array.push_back((*color)[vertex_id*3+2]);
            }
          
          if(this->layout == 3 || this->layout == 4)
          if(normal != nullptr)
            {
-             this->vertex_array.push_back((*normal)[vertex_id+0]);
-             this->vertex_array.push_back((*normal)[vertex_id+1]);
-             this->vertex_array.push_back((*normal)[vertex_id+2]);
+             this->vertex_array.push_back((*normal)[vertex_id*3+0]);
+             this->vertex_array.push_back((*normal)[vertex_id*3+1]);
+             this->vertex_array.push_back((*normal)[vertex_id*3+2]);
            }
        } 
   
@@ -78,38 +78,39 @@ std::vector<float>* VertexArray::UpdateVertexArray(std::vector<float>* position 
        {
          if(layout == 1) 
          if(position != nullptr) {
-           this->vertex_array[vertex_id+0]  = (*position)[vertex_id+0];
-           this->vertex_array[vertex_id+1] =  (*position)[vertex_id+1];
-           this->vertex_array[vertex_id+2] =  (*position)[vertex_id+2];
+           this->vertex_array[vertex_id+0]  = (*position)[3*vertex_id+0];
+           this->vertex_array[vertex_id+1] =  (*position)[3*vertex_id+1];
+           this->vertex_array[vertex_id+2] =  (*position)[3*vertex_id+2];
          }
          
          if(layout == 2 || layout == 4)
          if(color != nullptr)
            {
-             this->vertex_array[vertex_id + 3] = (*color)[vertex_id+0];
-             this->vertex_array[vertex_id + 4] = (*color)[vertex_id+1];
-             this->vertex_array[vertex_id + 5] = (*color)[vertex_id+2];
+             this->vertex_array[vertex_id + 3] = (*color)[3*vertex_id+0];
+             this->vertex_array[vertex_id + 4] = (*color)[3*vertex_id+1];
+             this->vertex_array[vertex_id + 5] = (*color)[3*vertex_id+2];
             
              if(layout == 4)     
              if(normal != nullptr)
              {
-              this->vertex_array[vertex_id + 6] = (*normal)[vertex_id+0];
-              this->vertex_array[vertex_id + 7] = (*normal)[vertex_id+1];
-              this->vertex_array[vertex_id + 8] = (*normal)[vertex_id+2];
+              this->vertex_array[vertex_id + 6] = (*normal)[3*vertex_id+0];
+              this->vertex_array[vertex_id + 7] = (*normal)[3*vertex_id+1];
+              this->vertex_array[vertex_id + 8] = (*normal)[3*vertex_id+2];
              }
            }
            
          if(layout == 3)  
          if(normal != nullptr)
             {
-             this->vertex_array[vertex_id + 3] = (*normal)[vertex_id+0];
-             this->vertex_array[vertex_id + 4] = (*normal)[vertex_id+1];
-             this->vertex_array[vertex_id + 5] = (*normal)[vertex_id+2];
+             this->vertex_array[vertex_id + 3] = (*normal)[3*vertex_id+0];
+             this->vertex_array[vertex_id + 4] = (*normal)[3*vertex_id+1];
+             this->vertex_array[vertex_id + 5] = (*normal)[3*vertex_id+2];
             } 
        } 
        
     return &this->vertex_array;   
 }
+
 
 bool VertexArray::push_back(Vertex vertex)
 {

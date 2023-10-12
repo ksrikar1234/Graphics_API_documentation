@@ -90,7 +90,7 @@ std::vector<float>* VertexArray::UpdateVertexArray(std::vector<float>* position 
              this->vertex_array[vertex_id + 4] = (*color)[vertex_id+1];
              this->vertex_array[vertex_id + 5] = (*color)[vertex_id+2];
             
-             if(layout == 3)     
+             if(layout == 4)     
              if(normal != nullptr)
              {
               this->vertex_array[vertex_id + 6] = (*normal)[vertex_id+0];

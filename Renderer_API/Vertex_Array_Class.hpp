@@ -1,3 +1,13 @@
+/*
+  author: Srikar Kadiyam <srikar@gridpro.com>
+ -----------------------------------------------+
+  Interleaved VertexArray Data structure :
+ -----------------------------------------------+
+  An Interleaved Array Data structure to efficiently build, update & pass it to OpenGL Buffers &
+  Shaders. Enables Bandwidth Optimisation by cache Locality.
+  Provides Convenience structures & functions to access data across the strides     
+*/
+
 #ifndef _VERTEX_ARRAY_CLASS_HPP_
 #define _VERTEX_ARRAY_CLASS_HPP_
 #include <cstdint>

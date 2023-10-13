@@ -131,7 +131,7 @@ void Model::SelectShader(std::string Name, const char* vertexShaderSource, const
 
 void Model::CreateVertexBuffer()
 {
-     gl_error();
+    gl_error();
     glGenVertexArrays(1, &this->VAO);
     glBindVertexArray(this->VAO);
 
@@ -162,15 +162,14 @@ void Model::CreateVertexBuffer()
 
     //glBufferData(GL_ARRAY_BUFFER, (vertex_array.vertex_array.size() + 1000)*sizeof(GLfloat), nullptr, GL_DYNAMIC_DRAW);
     //glBufferSubData(GL_ARRAY_BUFFER, 0, vertex_array.vertex_array.size() *sizeof(GLfloat),  &(vertex_array.vertex_array[0]));
-
+    
     GLint PosAttrib = glGetAttribLocation(this->ModelShader.ShaderProgram, "position");
-
     if(PosAttrib != -1)    printf("Found boom  boom Vertex Attribute : position");
     //else std::cerr << "No VertexAttributeLocation in shader with Name " << "position" << "\n";
     
     uint32_t n = (this->vertex_array.layout > 1) ? (this->vertex_array.layout > 3 ? 3 : 2) : 1;
     uint32_t stride_len = n*3;
-
+    PrintDebugMsg("stride_len\n");
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride_len * sizeof(GLfloat) , (void*)0); // Position Data Layout
     glEnableVertexAttribArray(0); 
     
@@ -231,6 +230,19 @@ void Model::Setup_Uniforms()
    glUniform3f(this->uniformLocations["lightAmbient"], 0.8f, 0.8f, 0.8f);
    glUniform3f(this->uniformLocations["lightDiffuse"], 0.8f, 0.8f, 0.8f);
    glUniform3f(this->uniformLocations["lightSpecular"], 1.0f, 1.0f, 1.0f);
+ 
+  this->uniformLocations["frag_light_enabled"] =  glGetUniformLocation(this->ModelShader.ShaderProgram, "frag_light_enabled");
+  glUniform1f (this->uniformLocations["frag_light_enabled"] , 1.0f);
+
+  this->uniformLocations["vertex_light_enabled"] =  glGetUniformLocation(this->ModelShader.ShaderProgram, "vertex_light_enabled");
+  glUniform1f (this->uniformLocations["vertex_light_enabled"] , 1.0f);
+
+  
+  this->uniformLocations["mono_color_scheme"] =  glGetUniformLocation(this->ModelShader.ShaderProgram, "mono_color_scheme");
+  glUniform1f(this->uniformLocations["mono_color_scheme"], 1.0f);
+
+  this->uniformLocations["model_color"] =  glGetUniformLocation(this->ModelShader.ShaderProgram, "model_color");
+  glUniform3f(this->uniformLocations["model_color"], 0.2f, 1.0f, 0.9f);
 
 }
 
@@ -326,8 +338,6 @@ while ((error = glGetError()) != GL_NO_ERROR) {
     }
 }
 }
-
-
 
 } // namespace Renderer_API 
 #endif

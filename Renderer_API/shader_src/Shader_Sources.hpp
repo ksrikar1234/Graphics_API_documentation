@@ -3,6 +3,7 @@
 
 namespace Renderer_API {
 
+
 /*
      Valid Shader combinations
      +---------------------------------------------------------------+
@@ -37,9 +38,9 @@ const char* vc_vertex_shader = R"(
 
     void main()
     {    
-      gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(VertexPos, 1.0);
+      gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
       if(mono_color_scheme == 1.0f) outColor = model_color;
-      else { outColor = VertexColor} ;
+      else { outColor = model_color;} ;
     }
 )";
 
@@ -60,7 +61,7 @@ const char* v_vertex_shader = R"(
 
     void main()
     {    
-      gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(VertexPos, 1.0);
+      gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
       outColor = model_color;
     }
 )";

@@ -113,7 +113,7 @@ Existing RenderPipeline Structure & Configuration exists as
   For using this interface include this header in your src file
 ```cpp 
   #ifdef GP_USE_RENDERER_API
-  #include "../Model_Renderer_API/Model_Renderer_API_Core/renderer_api.hpp"
+  #include "../gui_headers/view/gp_gui_mainwindow.h"
   #endif 
 ```
 - Example Porting to new interface 

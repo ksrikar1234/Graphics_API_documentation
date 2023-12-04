@@ -119,32 +119,48 @@ Existing RenderPipeline Structure & Configuration exists as
 - Example Porting to new interface 
 
 ```cpp
-  void Gp_gui_topology::draw_corners_render() const
-  {
-      if(! get_num_corners_in_corner_group(current_corner_group) && ! get_num_corners_in_corner_group(ref_corner_group))
-	  return;
-     #ifdef GP_USE_RENDERER_API
-     {
-     using namespace OpenGL_2_1_API;
-     Renderer::Model Corner_group(1);
-     Corner_group.setPrimitiveType(Renderer::PrimitiveType::POINTS);
-      if(! topology_corners_ref_group_indices_array.empty())
-      {
-         Corner_group.setMonoColor(ref_corner_color);
-         Corner_group.setVertexArray(topology_corner_positions_array);
-         Corner_group.setIndexArray(topology_corners_ref_group_indices_array);
-         Corner_group.render();
-      }
+#ifdef GP_USE_RENDERER_OPENGL_3_3
 
-      if(! topology_corners_cur_group_indices_array.empty())
-      {
-          Corner_group.setMonoColor(corner_color);
-          Corner_group.setVertexArray(topology_corner_positions_array);
-          Corner_group.setIndexArray(topology_corners_cur_group_indices_array);
-          Corner_group.render();
-      }
-      } 
-    #endif
+// Get an Unique Entity
+ HLM::EntityHandle Corners_Handle = Gp_gui_mainwindow::view() -> scene() -> getEntity("Corners");
+ 
+ // Get its Mesh component
+ HLM::OGLMesh* Corners_Mesh  =  Corners_Handle.GetComponent<HLM::OGLMesh>();
+
+ // Set Mesh Parameters  
+ Corners_Mesh->setVertexAttributeData(&topology_corner_positions_array, static_cast<std::vector<float>*>(nullptr), nullptr);
+ Corners_Mesh->setPickScheme(HLM::PickSchema::PICK_VERTEX);
+ Corners_Mesh->setVisitbility(true);
+
+ if(! topology_corners_ref_group_indices_array.empty())
+   {     
+      Corners_Mesh->setIndexArray(&topology_corners_ref_group_indices_array);
+      Corners_Mesh->setMonoColor(ref_corner_color.r, ref_corner_color.g, ref_corner_color.b, 255);
+      Corners_Mesh->setPrimitiveType(HLM::PrimitiveType::POINTS);
+      Corners_Handle.commit();
+      Gp_gui_mainwindow::view() -> scene() -> update(1);
+   }
+
+ if(! topology_corners_cur_group_indices_array.empty())
+    {
+      Corners_Mesh->setIndexArray(&topology_corners_cur_group_indices_array);
+      Corners_Mesh->setMonoColor(corner_color.r, corner_color.g, corner_color.b, 255);
+      Corners_Mesh->setPrimitiveType(HLM::PrimitiveType::POINTS);
+      Corners_Handle.commit();
+      Gp_gui_mainwindow::view() -> scene() -> update(1);
+    }
+
+HLM::EntityHandle Corners_Handle_2 = Gp_gui_mainwindow::view() -> scene() -> getEntity("Corners_2");
+HLM::EntityHandle Corners_Handle_3 = Gp_gui_mainwindow::view() -> scene() -> getEntity("Corners_3");
+
+Corners_Handle_2.destroy(); // dummies for testing
+Corners_Handle_3.destroy();
+
+HLM::Event::Subscription MySubsription("Topology");
+std::cout << "mouse coords = " << MySubsription.getMouseEvent().getMouseX() << " " << MySubsription.getMouseEvent().getMouseY() << "\n";
+std::cout << "picked primitive = " << MySubsription.getPickEvent().getColorID() << "\n";
+
+#endif // GP_USE_RENDERER_OPENGL_3_3
 ```
 - OpenGL 2.1 Equivalent code
 ```cpp
